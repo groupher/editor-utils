@@ -18,6 +18,6 @@ module.exports = {
     publicPath: "/",
     filename: "bundle.js",
     libraryTarget: "umd",
-    libraryExport: "default"
+    // libraryExport: "default"
   }
 };
