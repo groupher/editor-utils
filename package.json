@@ -1,0 +1,36 @@
+{
+  "name": "@groupher/editor-utils",
+  "version": "0.1.0",
+  "keywords": [
+    "codex editor",
+    "embed",
+    "tool",
+    "editor.js",
+    "editorjs"
+  ],
+  "description": "utils function for Editor.js",
+  "license": "MIT",
+  "repository": "https://github.com/groupher/editor-utils",
+  "main": "./dist/bundle.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode development --watch",
+    "test": "mocha -r @babel/register -r ignore-styles --recursive ./test"
+  },
+  "author": {
+    "name": "CodeX Team",
+    "email": "team@ifmo.su"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-transform-runtime": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.3.4",
+    "babel-loader": "^8.0.5",
+    "debounce": "^1.2.0",
+    "mocha": "^5.2.0",
+    "webpack": "^4.16.3",
+    "webpack-cli": "^3.2.3"
+  }
+}
