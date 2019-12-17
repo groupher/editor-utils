@@ -122,11 +122,11 @@ export const getQueryFromUrl = (name, url) => {
  * @private
  */
 
-export const highlightSettingIcon = (el, api) => {
-  if (el.parentNode) {
-    const buttons = el.parentNode.querySelectorAll('.' + api.styles.settingsButton);
-    Array.from(buttons).forEach( button => button.classList.remove(api.styles.settingsButtonActive));
-  }
-
-  el.classList.add(api.styles.settingsButtonActive);
-}
+/* export const highlightSettingIcon = (el, api) => { */
+  /* if (el.parentNode) { */
+    /* const buttons = el.parentNode.querySelectorAll('.' + api.styles.settingsButton); */
+    /* Array.from(buttons).forEach( button => button.classList.remove(api.styles.settingsButtonActive)); */
+    /* } */
+  /*  */
+  /* el.classList.add(api.styles.settingsButtonActive); */
+  /* } */
