@@ -1,3 +1,3 @@
 export { debounce } from "debounce";
-export { loadJS, make } from "./utils";
-export { highlightSettingIcon } from "./dom";
+export { loadJS, make, highlightSettingIcon } from "./utils";
+// export { highlightSettingIcon } from "./dom";
