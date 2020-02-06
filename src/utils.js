@@ -83,32 +83,44 @@ export const getQueryFromUrl = (name, url) => {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 };
 
+/**
+ * Helper for making Elements with attributes
+ *
+ * @param  {string} tagName           - new Element tag name
+ * @param  {array|string} classNames  - list or name of CSS classname(s)
+ * @param  {Object} attributes        - any attributes
+ * @return {Element}
+ */
+export const make = (tagName, classNames = null, attributes = {}) => {
+  let el = document.createElement(tagName);
+
+  if (Array.isArray(classNames)) {
+    el.classList.add(...classNames);
+  } else if (classNames) {
+    el.classList.add(classNames);
+  }
+
+  for (let attrName in attributes) {
+    // enhanced with setAttribute
+    if (attrName === "placeholder") {
+      el.setAttribute("placeholder", attributes[attrName]);
+    }
+
+    el[attrName] = attributes[attrName];
+  }
+
+  return el;
+};
 
 /**
-   * Helper for making Elements with attributes
-   *
-   * @param  {string} tagName           - new Element tag name
-   * @param  {array|string} classNames  - list or name of CSS classname(s)
-   * @param  {Object} attributes        - any attributes
-   * @return {Element}
-   */
-  export const make = (tagName, classNames = null, attributes = {}) => {
-    let el = document.createElement(tagName);
-
-    if (Array.isArray(classNames)) {
-      el.classList.add(...classNames);
-    } else if (classNames) {
-      el.classList.add(classNames);
-    }
-
-    for (let attrName in attributes) {
-      // enhanced with setAttribute
-      if (attrName === "placeholder") {
-        el.setAttribute("placeholder", attributes[attrName]);
-      }
-
-      el[attrName] = attributes[attrName];
-    }
-
-    return el;
+ * check if obj is empty
+ *
+ * @param {obj} object
+ * @returns boolean
+ */
+export const isEmptyObj = obj => {
+  for (var x in obj) {
+    return false;
   }
+  return true;
+};
