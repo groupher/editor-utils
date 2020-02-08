@@ -104,9 +104,11 @@ export const make = (tagName, classNames = null, attributes = {}) => {
     // enhanced with setAttribute
     if (attrName === "placeholder") {
       el.setAttribute("placeholder", attributes[attrName]);
+    } else if (attrName.indexOf("data-") === 0) {
+      el.setAttribute(attrName, attributes[attrName]);
+    } else {
+      el[attrName] = attributes[attrName];
     }
-
-    el[attrName] = attributes[attrName];
   }
 
   return el;
