@@ -126,3 +126,22 @@ export const isEmptyObj = obj => {
   }
   return true;
 };
+
+/**
+ * findIndex for all browsers
+ *
+ * @param {array} Array
+ * @param {function} perdicate
+ * @returns number
+ */
+export const findIndex = (array, predicate) => {
+  const { length } = array;
+  let index = -1;
+
+  while (++index < length) {
+    if (predicate(array[index], index, array)) {
+      return index;
+    }
+  }
+  return -1;
+};
