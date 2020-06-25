@@ -12,7 +12,7 @@ export const highlightSettingIcon = (el, api) => {
     const buttons = el.parentNode.querySelectorAll(
       "." + api.styles.settingsButton
     );
-    Array.from(buttons).forEach(button =>
+    Array.from(buttons).forEach((button) =>
       button.classList.remove(api.styles.settingsButtonActive)
     );
   }
@@ -24,7 +24,7 @@ export const highlightSettingIcon = (el, api) => {
  * Moves caret to the end of contentEditable element
  * @param {HTMLElement} element - contentEditable element
  */
-export const moveCaretToEnd = element => {
+export const moveCaretToEnd = (element) => {
   const range = document.createRange();
   const selection = window.getSelection();
 
@@ -32,4 +32,70 @@ export const moveCaretToEnd = element => {
   range.collapse(false);
   selection.removeAllRanges();
   selection.addRange(range);
+};
+
+// NOTE:  html is string
+// see: https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
+// demo: http://jsfiddle.net/jwvha/1/
+export const insertHtmlAtCaret = (html) => {
+  let sel, range;
+
+  if (window.getSelection) {
+    // IE9 and non-IE
+    sel = window.getSelection();
+    if (sel.getRangeAt && sel.rangeCount) {
+      range = sel.getRangeAt(0);
+      range.deleteContents();
+
+      // Range.createContextualFragment() would be useful here but is
+      // non-standard and not supported in all browsers (IE9, for one)
+      const el = document.createElement("div");
+
+      el.innerHTML = html;
+      var frag = document.createDocumentFragment(),
+        node,
+        lastNode;
+
+      while ((node = el.firstChild)) {
+        lastNode = frag.appendChild(node);
+      }
+      range.insertNode(frag);
+
+      // Preserve the selection
+      if (lastNode) {
+        range = range.cloneRange();
+        range.setStartAfter(lastNode);
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+    }
+  }
+};
+
+// select a html node
+export const selectNode = function (node) {
+  if (document.body.createTextRange) {
+    const range = document.body.createTextRange();
+
+    range.moveToElementText(node);
+    range.select();
+  } else if (window.getSelection) {
+    const selection = window.getSelection();
+    const range = document.createRange();
+
+    // range.collapse(true);
+    // const startIndex = 6;
+    // const endIndex = 7; // node.textContent.length;
+
+    // range.setStart(node.childNodes[0], startIndex);
+    // range.setEnd(node.childNodes[0], endIndex);
+
+    range.selectNodeContents(node);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    // console.log('2 -->', range.extractContents());
+  } else {
+    console.warn("Could not select text in node: Unsupported browser.");
+  }
 };
