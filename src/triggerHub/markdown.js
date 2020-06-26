@@ -1,3 +1,5 @@
+import { insertHtmlAtCaret, selectNode } from '../dom'
+
 const CSS = {
   marker: 'cdx-marker',
   inlineCode: 'inline-code',
@@ -219,18 +221,12 @@ export const handleMDShortcut = (ev, api) => {
   const curBlock = api.blocks.getBlockByIndex(curBlockIndex)
 
   const { isValidMDStatus, MDType } = checkMarkdownSyntax(curBlock, ev.data)
-  console.log(
-    'checkMarkdownSyntax(curBlock, ev.data) -> ',
-    checkMarkdownSyntax(curBlock, ev.data)
-  )
   if (!isValidMDStatus) return false
 
   // delete current block
   const { isInvalid, type, toolData, config } = markdownBlockConfig(MDType)
-  console.log('markdownBlockConfig(MDType) -> ', markdownBlockConfig(MDType))
 
   if (!isInvalid) {
-    console.log('api.blocks.delete: ', curBlockIndex)
     api.blocks.delete(curBlockIndex)
     api.blocks.insert(type, toolData, config, curBlockIndex)
     // set cursor to first char
