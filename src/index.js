@@ -1,4 +1,8 @@
-import { handleMDShortcut, handleInlineMDShortcut } from "./triggerHub";
+import {
+  handleMDShortcut,
+  handleInlineMDShortcut,
+  handleMention,
+} from "./triggerHub";
 
 export { debounce } from "debounce";
 export { loadJS, make, isEmptyObj, findIndex } from "./utils";
