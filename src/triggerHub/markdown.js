@@ -1,6 +1,9 @@
+import debug from "debug";
+
 import { insertHtmlAtCaret, selectNode } from "../dom";
 import { ANCHOR, CSS } from "./metrics";
 
+const log = debug("@groupher/editor-utils:markdown");
 /**
  * supported markdown syntax constants
  * NOTE:  inline markdown syntax is not included, like bold/italic/inline-code etc..
@@ -212,7 +215,7 @@ export const handleMDShortcut = (ev, api) => {
 
   // delete current block
   const { isInvalid, type, toolData, config } = markdownBlockConfig(MDType);
-  console.log("markdownBlockConfig(MDType) -> ", markdownBlockConfig(MDType));
+  log("markdownBlockConfig(MDType) -> ", markdownBlockConfig(MDType));
 
   if (!isInvalid) {
     api.blocks.delete(curBlockIndex);
