@@ -207,10 +207,15 @@ export const handleMDShortcut = (ev, api) => {
   const curBlockIndex = api.blocks.getCurrentBlockIndex();
   const curBlock = api.blocks.getBlockByIndex(curBlockIndex);
 
+  console.log(
+    "1 checkMarkdownSyntax(curBlock, ev.data): ",
+    checkMarkdownSyntax(curBlock, ev.data)
+  );
   const { isValidMDStatus, MDType } = checkMarkdownSyntax(curBlock, ev.data);
   if (!isValidMDStatus) return false;
 
   // delete current block
+  console.log("2 markdownBlockConfig(MDType): ", markdownBlockConfig(MDType));
   const { isInvalid, type, toolData, config } = markdownBlockConfig(MDType);
 
   if (!isInvalid) {
