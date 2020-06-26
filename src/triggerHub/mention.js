@@ -1,4 +1,5 @@
 import { insertHtmlAtCaret, selectNode } from "../dom";
+import { ANCHOR, CSS, TRIGGER } from "./metrics";
 
 /**
  * handle mention (@)
@@ -7,10 +8,9 @@ import { insertHtmlAtCaret, selectNode } from "../dom";
  * @private
  */
 const handleMention = (ev) => {
-  if (ev.data === "@") {
-    const mentionClass = "cdx-mention";
-    const mention = `<span class="${mentionClass}" contenteditable="false" id="${mentionClass}" tabindex="1" style="opacity: 1;">&nbsp;</span>`;
-    const mentionId = `#${mentionClass}`;
+  if (ev.data === TRIGGER.mention) {
+    const mention = `<span class="${CSS.mention}" contenteditable="false" id="${CSS.mention}" tabindex="1">&nbsp;</span>`;
+    const mentionId = `#${CSS.mention}`;
 
     insertHtmlAtCaret(mention);
 
@@ -18,9 +18,8 @@ const handleMention = (ev) => {
     insertHtmlAtCaret(ANCHOR.SPACE);
 
     const mentionParent = document.querySelector(mentionId).parentElement;
-    console.log("mentionParent ", mentionParent.innerHTML);
     mentionParent.innerHTML = mentionParent.innerHTML.replace(
-      "@" + mention,
+      TRIGGER.mention + mention,
       mention
     );
     selectNode(document.querySelector(mentionId));
