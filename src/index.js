@@ -15,3 +15,5 @@ export {
 } from "./dom";
 
 export { enhanceBlock } from "./enhancer";
+
+export { default as buildLog } from "./logger";

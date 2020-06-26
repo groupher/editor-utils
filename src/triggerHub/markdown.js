@@ -1,9 +1,9 @@
-import debug from "debug";
-
 import { insertHtmlAtCaret, selectNode } from "../dom";
+import buildLog from "../logger";
+
 import { ANCHOR, CSS } from "./metrics";
 
-const log = debug("@groupher/editor-utils:markdown");
+const log = buildLog("utils:markdown");
 /**
  * supported markdown syntax constants
  * NOTE:  inline markdown syntax is not included, like bold/italic/inline-code etc..
