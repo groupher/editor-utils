@@ -1,8 +1,22 @@
+import debounce from "debounce";
+
 import {
   handleMDShortcut,
   handleInlineMDShortcut,
   handleMention,
 } from "./triggerHub";
+
+const handler = (ev, api, opt) => {
+  if (opt.markdown) {
+    handleMDShortcut(ev, api);
+  }
+  if (opt.inlineMarkdown) {
+    handleInlineMDShortcut(ev, api);
+  }
+  if (opt.mention) {
+    handleMention(ev);
+  }
+};
 
 /**
  * enhance the block with options
@@ -21,17 +35,7 @@ export const enhanceBlock = (el, api, option = {}) => {
   api.listeners.on(
     el,
     "input",
-    (ev) => {
-      if (opt.markdown) {
-        handleMDShortcut(ev, api);
-      }
-      if (opt.inlineMarkdown) {
-        handleInlineMDShortcut(ev, api);
-      }
-      if (opt.mention) {
-        handleMention(ev);
-      }
-    },
+    (ev) => debounce(handler(ev, api, opt), 100),
     true
   );
 };
