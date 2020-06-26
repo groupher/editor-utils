@@ -13,4 +13,5 @@ export {
 export const TriggerHub = {
   handleMDShortcut,
   handleInlineMDShortcut,
+  handleMention,
 };

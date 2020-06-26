@@ -1,3 +1,2 @@
 export { handleMDShortcut, handleInlineMDShortcut } from "./markdown";
-
-export const holder = 1;
+export { default as handleMention } from "./mention";
