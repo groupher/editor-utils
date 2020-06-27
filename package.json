@@ -1,6 +1,6 @@
 {
   "name": "@groupher/editor-utils",
-  "version": "0.1.39",
+  "version": "0.1.40",
   "keywords": [
     "codex editor",
     "embed",
@@ -34,6 +34,7 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
-    "debug": "^4.1.1"
+    "debug": "^4.1.1",
+    "pubsub-js": "^1.8.0"
   }
 }
