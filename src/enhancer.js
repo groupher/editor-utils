@@ -62,15 +62,14 @@ export const enhanceBlock = (el, api, option = {}) => {
   api.listeners.on(
     el,
     "input",
-    (ev) => debounce(inputHandler((ev, api, opt)), 100),
-    (ev) => debounceInputHandler(ev, api, opt),
+    (ev) => debounce(inputHandler(ev, api, opt), 100),
     false
   );
 
-  api.listeners.on(el, "keyup", (ev) => keyupHandler(ev));
+  api.listeners.on(el, "keyup", (ev) => keyupHandler(ev), false);
 };
 
 export const freeEnhanceBlock = (el, api) => {
-  api.listeners.off(el, "input", (ev) => inputHandler(el, api));
+  api.listeners.off(el, "input", (ev) => inputHandler(el, api), false);
   api.listeners.off(el, "keyup", (ev) => keyupHandler(ev), false);
 };
