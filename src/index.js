@@ -18,4 +18,4 @@ export { enhanceBlock, freeEnhanceBlock } from "./enhancer";
 
 export { default as buildLog } from "./logger";
 
-export { default as initEventBus } from "./event";
+export { initEventBus, EVENTS } from "./event";

@@ -1,6 +1,6 @@
 import PubSub from "pubsub-js";
 
-const initEventBus = () => {
+export const initEventBus = () => {
   if (!window.PubSub) {
     window.PubSub = PubSub;
   }
@@ -8,4 +8,6 @@ const initEventBus = () => {
   return window.PubSub;
 };
 
-export default initEventBus;
+export const EVENTS = {
+  KEEP_PARAGRAPH_AFTER_REMOVED: "KEEP_PARAGRAPH_AFTER_REMOVED",
+};
