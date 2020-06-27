@@ -14,6 +14,6 @@ export {
   insertHtmlAtCaret,
 } from "./dom";
 
-export { enhanceBlock } from "./enhancer";
+export { enhanceBlock, freeEnhanceBlock } from "./enhancer";
 
 export { default as buildLog } from "./logger";

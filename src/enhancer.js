@@ -1,4 +1,5 @@
 import debounce from "debounce";
+import buildLog from "./logger";
 
 import {
   handleMDShortcut,
@@ -6,7 +7,11 @@ import {
   handleMention,
 } from "./triggerHub";
 
-const handler = (ev, api, opt) => {
+import { CSS } from "./triggerHub/metrics";
+
+const log = buildLog("utils:enhancer");
+
+const inputHandler = (ev, api, opt) => {
   if (opt.markdown) {
     handleMDShortcut(ev, api);
   }
@@ -15,6 +20,30 @@ const handler = (ev, api, opt) => {
   }
   if (opt.mention) {
     handleMention(ev);
+  }
+};
+
+const debounceInputHandler = debounce(inputHandler(ev, api, opt), 100);
+
+/**
+ * remove the special element(mention, emoji etc..) by one step
+ * 一次性移除 mention emoji 等特别的元素
+ *
+ * @returns void
+ */
+const keyupHandler = (e) => {
+  if (e.code !== "Backspace" && e.code !== "Delete") {
+    return;
+  }
+
+  if (window.getSelection) {
+    let sel = window.getSelection();
+
+    if (sel.anchorNode.parentNode.className === CSS.mention) {
+      sel.anchorNode.parentNode.remove();
+    }
+  } else {
+    log("window Selection is not supported.");
   }
 };
 
@@ -35,9 +64,14 @@ export const enhanceBlock = (el, api, option = {}) => {
   api.listeners.on(
     el,
     "input",
-    (ev) => debounce(handler(ev, api, opt), 100),
-    true
+    (ev) => debounceInputHandler(ev, api, opt),
+    false
   );
+
+  api.listeners.on(el, "keyup", (ev) => keyupHandler(ev));
 };
 
-export const holder = 1;
+export const freeEnhanceBlock = (el, api) => {
+  api.listeners.off(el, "input", (ev) => debounceInputHandler(el, api));
+  api.listeners.off(el, "keyup", (ev) => keyupHandler(ev), false);
+};
