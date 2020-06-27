@@ -11,7 +11,7 @@ import { CSS } from "./triggerHub/metrics";
 
 const log = buildLog("utils:enhancer");
 
-const inputHandler = (ev, api, opt) => {
+const inputHandler = debounce((ev, api, opt) => {
   if (opt.markdown) {
     handleMDShortcut(ev, api);
   }
@@ -21,9 +21,7 @@ const inputHandler = (ev, api, opt) => {
   if (opt.mention) {
     handleMention(ev);
   }
-};
-
-const debounceInputHandler = debounce(inputHandler(ev, api, opt), 100);
+}, 100);
 
 /**
  * remove the special element(mention, emoji etc..) by one step
@@ -64,6 +62,7 @@ export const enhanceBlock = (el, api, option = {}) => {
   api.listeners.on(
     el,
     "input",
+    (ev) => inputHandler((ev, api, opt)),
     (ev) => debounceInputHandler(ev, api, opt),
     false
   );
@@ -72,6 +71,6 @@ export const enhanceBlock = (el, api, option = {}) => {
 };
 
 export const freeEnhanceBlock = (el, api) => {
-  api.listeners.off(el, "input", (ev) => debounceInputHandler(el, api));
+  api.listeners.off(el, "input", (ev) => inputHandler(el, api));
   api.listeners.off(el, "keyup", (ev) => keyupHandler(ev), false);
 };
