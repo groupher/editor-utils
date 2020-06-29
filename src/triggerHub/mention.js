@@ -1,5 +1,6 @@
 import { insertHtmlAtCaret, selectNode } from "../dom";
 import { CSS, TRIGGER } from "./metrics";
+import { INLINE_BLOCK_TAG } from "../constant";
 
 /**
  * handle mention (@)
@@ -9,7 +10,7 @@ import { CSS, TRIGGER } from "./metrics";
  */
 const handleMention = (ev) => {
   if (ev.data === TRIGGER.mention) {
-    const mention = `<span class="${CSS.mention}" contenteditable="false" id="${CSS.mention}" tabindex="1">&nbsp;</span>`;
+    const mention = `<${INLINE_BLOCK_TAG.mention} class="${CSS.mention}" contenteditable="false" id="${CSS.mention}" tabindex="1">&nbsp;</${INLINE_BLOCK_TAG.mention}>`;
     const mentionId = `#${CSS.mention}`;
 
     insertHtmlAtCaret(mention);
