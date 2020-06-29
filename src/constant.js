@@ -1,4 +1,5 @@
 export const CSS = {
+  focusHolder: "focus-holder",
   mention: "cdx-mention",
 };
 
