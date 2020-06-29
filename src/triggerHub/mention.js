@@ -1,5 +1,5 @@
 import { insertHtmlAtCaret, selectNode } from "../dom";
-import { ANCHOR, CSS, TRIGGER } from "./metrics";
+import { CSS, TRIGGER } from "./metrics";
 
 /**
  * handle mention (@)
@@ -13,9 +13,6 @@ const handleMention = (ev) => {
     const mentionId = `#${CSS.mention}`;
 
     insertHtmlAtCaret(mention);
-
-    insertHtmlAtCaret(ANCHOR.SPACE);
-    insertHtmlAtCaret(ANCHOR.SPACE);
 
     const mentionParent = document.querySelector(mentionId).parentElement;
     mentionParent.innerHTML = mentionParent.innerHTML.replace(
