@@ -19,3 +19,5 @@ export { enhanceBlock, freeEnhanceBlock } from "./enhancer";
 export { default as buildLog } from "./logger";
 
 export { initEventBus, EVENTS } from "./event";
+
+export { CSS, INLINE_BLOCK_TAG } from "./constant";
