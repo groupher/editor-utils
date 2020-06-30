@@ -5,7 +5,7 @@
  * @param {*} func callback function
  * @param {*} location
  */
-export const loadJS = function(url, func, location) {
+export const loadJS = function (url, func, location) {
   // url is URL of external file, func is the code
   // to be called from the file, location is the location to
   // insert the <script> element
@@ -83,50 +83,65 @@ export const getQueryFromUrl = (name, url) => {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 };
 
-
 /**
-   * Helper for making Elements with attributes
-   *
-   * @param  {string} tagName           - new Element tag name
-   * @param  {array|string} classNames  - list or name of CSS classname(s)
-   * @param  {Object} attributes        - any attributes
-   * @return {Element}
-   */
-  export const make = (tagName, classNames = null, attributes = {}) => {
-    let el = document.createElement(tagName);
+ * Helper for making Elements with attributes
+ *
+ * @param  {string} tagName           - new Element tag name
+ * @param  {array|string} classNames  - list or name of CSS classname(s)
+ * @param  {Object} attributes        - any attributes
+ * @return {Element}
+ */
+export const make = (tagName, classNames = null, attributes = {}) => {
+  let el = document.createElement(tagName);
 
-    if (Array.isArray(classNames)) {
-      el.classList.add(...classNames);
-    } else if (classNames) {
-      el.classList.add(classNames);
-    }
+  if (Array.isArray(classNames)) {
+    el.classList.add(...classNames);
+  } else if (classNames) {
+    el.classList.add(classNames);
+  }
 
-    for (let attrName in attributes) {
-      // enhanced with setAttribute
-      if (attrName === "placeholder") {
-        el.setAttribute("placeholder", attributes[attrName]);
-      }
-
+  for (let attrName in attributes) {
+    // enhanced with setAttribute
+    if (attrName === "placeholder") {
+      el.setAttribute("placeholder", attributes[attrName]);
+    } else if (attrName.indexOf("data-") === 0) {
+      el.setAttribute(attrName, attributes[attrName]);
+    } else {
       el[attrName] = attributes[attrName];
     }
-
-    return el;
   }
+
+  return el;
+};
 
 /**
- * highlight the setting icon in setting panel
- * @param el {HTMLElement}
- * @param api editor.js's api
+ * check if obj is empty
  *
- * @returns void
- * @private
+ * @param {obj} object
+ * @returns boolean
  */
-
-export const highlightSettingIcon = (el, api) => {
-  if (el.parentNode) {
-    const buttons = el.parentNode.querySelectorAll('.' + api.styles.settingsButton);
-    Array.from(buttons).forEach( button => button.classList.remove(api.styles.settingsButtonActive));
+export const isEmptyObj = obj => {
+  for (var x in obj) {
+    return false;
   }
+  return true;
+};
 
-  el.classList.add(api.styles.settingsButtonActive);
-}
+/**
+ * findIndex for all browsers
+ *
+ * @param {array} Array
+ * @param {function} perdicate
+ * @returns number
+ */
+export const findIndex = (array, predicate) => {
+  const { length } = array;
+  let index = -1;
+
+  while (++index < length) {
+    if (predicate(array[index], index, array)) {
+      return index;
+    }
+  }
+  return -1;
+};
