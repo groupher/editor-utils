@@ -1,3 +1,7 @@
+import buildLog from './logger'
+
+const log = buildLog('utils/dom')
+
 /**
  * highlight the setting icon in setting panel
  * @param el {HTMLElement}
@@ -141,6 +145,7 @@ const setElementDisplayByClass = (css, attr) => {
  * @return {void}
  */
 export const keepCustomInlineToolOnly = (tool, inlineToolCSS = "ce-inline-toolbar__buttons") => {
+  log("keepCustomInlineToolOnly: ", tool)
   // build-in inline tools
   setElementDisplayByClass(inlineToolCSS, 'none')
 
@@ -162,6 +167,8 @@ export const keepCustomInlineToolOnly = (tool, inlineToolCSS = "ce-inline-toolba
  * @return {void}
  */
 export const restoreDefaultInlineTools = (inlineToolCSS = "ce-inline-toolbar__buttons") => {
+  log("restoreDefaultInlineTools: ")
+
   setElementDisplayByClass(inlineToolCSS, 'block')
 
   setElementDisplayByClass('cdx-mention__container', 'none')
