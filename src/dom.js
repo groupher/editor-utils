@@ -126,3 +126,49 @@ export const selectNode = function (node) {
     console.warn("Could not select text in node: Unsupported browser.");
   }
 };
+
+const setElementDisplayByClass = (css, attr) => {
+  const el = document.querySelector(`.${css}`)
+  if (el) {
+    el.style.display = attr
+  }
+}
+
+/**
+ * hide all custom inline tools except tool
+ * @param tool {String}
+ * @param inlineToolCSS {String} default inline toolbar buttons class
+ * @return {void}
+ */
+export const keepCustomInlineToolOnly = (tool, inlineToolCSS = "ce-inline-toolbar__buttons") => {
+  // build-in inline tools
+  setElementDisplayByClass(inlineToolCSS, 'none')
+
+  if (tool === 'mention') {
+    setElementDisplayByClass('cdx-mention__container', 'block')
+    setElementDisplayByClass('cdx-emoji__container', 'none')
+  }
+
+  if (tool === 'emoji') {
+    setElementDisplayByClass('cdx-emoji__container', 'block')
+    setElementDisplayByClass('cdx-mention__container', 'none')
+  }
+}
+
+/**
+ * restore default inline toolbar buttons
+ * @param tool {String}
+ * @param inlineToolCSS {String} default inline toolbar buttons class
+ * @return {void}
+ */
+export const restoreDefaultInlineTools = (tool, inlineToolCSS = "ce-inline-toolbar__buttons") => {
+  setElementDisplayByClass(inlineToolCSS, 'block')
+
+  if (tool === 'mention') {
+    setElementDisplayByClass('cdx-mention__container', 'none')
+  }
+
+  if (tool === 'emoji') {
+    setElementDisplayByClass('cdx-emoji__container', 'none')
+  }
+}

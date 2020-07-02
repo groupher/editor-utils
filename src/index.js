@@ -12,6 +12,8 @@ export {
   moveCaretToEnd,
   selectNode,
   insertHtmlAtCaret,
+  keepCustomInlineToolOnly,
+  restoreDefaultInlineTools,
 } from "./dom";
 
 export { enhanceBlock, freeEnhanceBlock } from "./enhancer";
