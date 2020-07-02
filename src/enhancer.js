@@ -5,6 +5,7 @@ import {
   handleMDShortcut,
   handleInlineMDShortcut,
   handleMention,
+  handleEmoji,
 } from "./triggerHub";
 
 import { CSS } from "./triggerHub/metrics";
@@ -20,6 +21,9 @@ const inputHandler = (ev, api, opt) => {
   }
   if (opt.mention) {
     handleMention(ev);
+  }
+  if (opt.emoji) {
+    handleEmoji(ev);
   }
 };
 
