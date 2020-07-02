@@ -1,6 +1,9 @@
+import buildLog from '../logger'
 import { insertHtmlAtCaret, selectNode } from "../dom";
 import { CSS, TRIGGER } from "./metrics";
 import { INLINE_BLOCK_TAG } from "../constant";
+
+const log = buildLog('utils/emoji')
 
 /**
  * handle emoji (@)
@@ -9,6 +12,7 @@ import { INLINE_BLOCK_TAG } from "../constant";
  * @private
  */
 const handleEmoji = (ev) => {
+  log('handleEmoji: ', ev.data)
   if (ev.data === TRIGGER.emoji) {
     const emoji = `<${INLINE_BLOCK_TAG.emoji} class="${CSS.emoji}" contenteditable="false" id="${CSS.emoji}" tabindex="1">&nbsp;</${INLINE_BLOCK_TAG.emoji}>`;
     const emojiId = `#${CSS.emoji}`;

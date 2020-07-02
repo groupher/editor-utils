@@ -1,6 +1,9 @@
+import buildLog from '../logger'
 import { insertHtmlAtCaret, selectNode } from "../dom";
 import { CSS, TRIGGER } from "./metrics";
 import { INLINE_BLOCK_TAG } from "../constant";
+
+const log = buildLog('utils/emoji')
 
 /**
  * handle mention (@)
@@ -9,6 +12,7 @@ import { INLINE_BLOCK_TAG } from "../constant";
  * @private
  */
 const handleMention = (ev) => {
+  log('handleMention: ', ev.data)
   if (ev.data === TRIGGER.mention) {
     const mention = `<${INLINE_BLOCK_TAG.mention} class="${CSS.mention}" contenteditable="false" id="${CSS.mention}" tabindex="1">&nbsp;</${INLINE_BLOCK_TAG.mention}>`;
     const mentionId = `#${CSS.mention}`;
