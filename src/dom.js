@@ -161,14 +161,9 @@ export const keepCustomInlineToolOnly = (tool, inlineToolCSS = "ce-inline-toolba
  * @param inlineToolCSS {String} default inline toolbar buttons class
  * @return {void}
  */
-export const restoreDefaultInlineTools = (tool, inlineToolCSS = "ce-inline-toolbar__buttons") => {
+export const restoreDefaultInlineTools = (inlineToolCSS = "ce-inline-toolbar__buttons") => {
   setElementDisplayByClass(inlineToolCSS, 'block')
 
-  if (tool === 'mention') {
-    setElementDisplayByClass('cdx-mention__container', 'none')
-  }
-
-  if (tool === 'emoji') {
-    setElementDisplayByClass('cdx-emoji__container', 'none')
-  }
+  setElementDisplayByClass('cdx-mention__container', 'none')
+  setElementDisplayByClass('cdx-emoji__container', 'none')
 }
