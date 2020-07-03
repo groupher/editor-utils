@@ -15,6 +15,7 @@ export {
   keepCustomInlineToolOnly,
   restoreDefaultInlineTools,
   removeElementByClass,
+  convertElementToTextIfNeed,
 } from "./dom";
 
 export { enhanceBlock, freeEnhanceBlock } from "./enhancer";

@@ -194,3 +194,18 @@ export const restoreDefaultInlineTools = (inlineToolCSS = "ce-inline-toolbar__bu
   setDisplayByClass('cdx-mention__container', 'none')
   setDisplayByClass('cdx-emoji__container', 'none')
 }
+
+/**
+ * replace target element with sign(normal text) if the judge element is empty
+ * 当 judgeEl 的值为空时，将 targetElement 替换为 sign (普通的 text)
+ *
+ * @param {HTMLElement} targetEl - target element to replace
+ * @param {HTMLElement} judgeEl - judge element, usually input element
+ * @param {String} sign - final replace element with this sign
+ */
+export const convertElementToTextIfNeed = (targetEl, judgeEl, sign = '@') => {
+  if (judgeEl.value.trim() === '') {
+    targetEl.replaceWith("")
+    insertHtmlAtCaret(sign)
+  }
+}
