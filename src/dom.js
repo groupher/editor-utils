@@ -131,10 +131,30 @@ export const selectNode = function (node) {
   }
 };
 
-const setElementDisplayByClass = (css, attr) => {
+/**
+ * set display attr for an element selected by css
+ * @param css {String}
+ * @param attr {String} none | block
+ * @return {void}
+ */
+const setDisplayByClass = (css, attr) => {
   const el = document.querySelector(`.${css}`)
   if (el) {
     el.style.display = attr
+  }
+}
+
+/**
+ * remove an element selected by css
+ * @param css {String}
+ * @param attr {String} none | block
+ * @return {void}
+ */
+export const removeElementByClass = (css, attr) => {
+  const el = document.querySelector(`.${css}`)
+
+  if (el) {
+    el.remove()
   }
 }
 
@@ -147,16 +167,16 @@ const setElementDisplayByClass = (css, attr) => {
 export const keepCustomInlineToolOnly = (tool, inlineToolCSS = "ce-inline-toolbar__buttons") => {
   log("keepCustomInlineToolOnly: ", tool)
   // build-in inline tools
-  setElementDisplayByClass(inlineToolCSS, 'none')
+  setDisplayByClass(inlineToolCSS, 'none')
 
   if (tool === 'mention') {
-    setElementDisplayByClass('cdx-mention__container', 'block')
-    setElementDisplayByClass('cdx-emoji__container', 'none')
+    setDisplayByClass('cdx-mention__container', 'block')
+    setDisplayByClass('cdx-emoji__container', 'none')
   }
 
   if (tool === 'emoji') {
-    setElementDisplayByClass('cdx-emoji__container', 'block')
-    setElementDisplayByClass('cdx-mention__container', 'none')
+    setDisplayByClass('cdx-emoji__container', 'block')
+    setDisplayByClass('cdx-mention__container', 'none')
   }
 }
 
@@ -169,8 +189,8 @@ export const keepCustomInlineToolOnly = (tool, inlineToolCSS = "ce-inline-toolba
 export const restoreDefaultInlineTools = (inlineToolCSS = "ce-inline-toolbar__buttons") => {
   log("restoreDefaultInlineTools: ")
 
-  setElementDisplayByClass(inlineToolCSS, 'block')
+  setDisplayByClass(inlineToolCSS, 'block')
 
-  setElementDisplayByClass('cdx-mention__container', 'none')
-  setElementDisplayByClass('cdx-emoji__container', 'none')
+  setDisplayByClass('cdx-mention__container', 'none')
+  setDisplayByClass('cdx-emoji__container', 'none')
 }

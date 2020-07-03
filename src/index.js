@@ -14,6 +14,7 @@ export {
   insertHtmlAtCaret,
   keepCustomInlineToolOnly,
   restoreDefaultInlineTools,
+  removeElementByClass,
 } from "./dom";
 
 export { enhanceBlock, freeEnhanceBlock } from "./enhancer";
