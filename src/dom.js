@@ -12,7 +12,7 @@ const log = buildLog('utils/dom')
  * @returns void
  */
 export const importScript = (src, externals = []) => {
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const script = document.createElement('script')
     script.setAttribute('src', src)
     script.addEventListener('load', () => {
