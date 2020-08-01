@@ -41,8 +41,14 @@ const removeClass = (elem, c) => {
   }
 };
 
-const toggleClass = (elem, c) => {
-  const fn = hasClass(elem, c) ? removeClass : addClass;
+const toggleClass = (elem, c, condition) => {
+  let fn;
+  if (condition !== undefined) {
+    fn = condition ? addClass : removeClass;
+  } else {
+    fn = hasClass(elem, c) ? removeClass : addClass;
+  }
+
   fn(elem, c);
 };
 
