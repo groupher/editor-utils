@@ -1,7 +1,8 @@
-import buildLog from './logger'
+import buildLog from "../logger";
 
-const log = buildLog('utils/dom')
+export { default as clazz } from "./clazz";
 
+const log = buildLog("utils/dom");
 
 /**
  * highlight the setting icon in setting panel
@@ -13,20 +14,22 @@ const log = buildLog('utils/dom')
  */
 export const importScript = (src, externals = []) => {
   return new Promise((resolve, reject) => {
-    const script = document.createElement('script')
-    script.setAttribute('src', src)
-    script.addEventListener('load', () => {
-      resolve(externals.map(key => {
-        const ext = window[key]
-        typeof ext === 'undefined' && console.warn(`No external named '${key}' in window`)
-        return ext
-      }))
-    })
-    script.addEventListener('error', reject)
-    document.body.appendChild(script)
-  })
-}
-
+    const script = document.createElement("script");
+    script.setAttribute("src", src);
+    script.addEventListener("load", () => {
+      resolve(
+        externals.map((key) => {
+          const ext = window[key];
+          typeof ext === "undefined" &&
+            console.warn(`No external named '${key}' in window`);
+          return ext;
+        })
+      );
+    });
+    script.addEventListener("error", reject);
+    document.body.appendChild(script);
+  });
+};
 
 /**
  * highlight the setting icon in setting panel
@@ -72,24 +75,24 @@ export const highlightSettingIcon = (el, api) => {
  * @private
  */
 export const moveCaretToEnd = (el) => {
-  el.focus()
+  el.focus();
   if (
-    typeof window.getSelection != 'undefined' &&
-    typeof document.createRange != 'undefined'
+    typeof window.getSelection != "undefined" &&
+    typeof document.createRange != "undefined"
   ) {
-    var range = document.createRange()
-    range.selectNodeContents(el)
-    range.collapse(false)
-    var sel = window.getSelection()
-    sel.removeAllRanges()
-    sel.addRange(range)
-  } else if (typeof document.body.createTextRange != 'undefined') {
-    var textRange = document.body.createTextRange()
-    textRange.moveToElementText(el)
-    textRange.collapse(false)
-    textRange.select()
+    var range = document.createRange();
+    range.selectNodeContents(el);
+    range.collapse(false);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  } else if (typeof document.body.createTextRange != "undefined") {
+    var textRange = document.body.createTextRange();
+    textRange.moveToElementText(el);
+    textRange.collapse(false);
+    textRange.select();
   }
-}
+};
 
 // NOTE:  html is string
 // see: https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
@@ -164,11 +167,11 @@ export const selectNode = function (node) {
  * @return {void}
  */
 const setDisplayByClass = (css, attr) => {
-  const el = document.querySelector(`.${css}`)
+  const el = document.querySelector(`.${css}`);
   if (el) {
-    el.style.display = attr
+    el.style.display = attr;
   }
-}
+};
 
 /**
  * remove an element selected by css
@@ -177,12 +180,12 @@ const setDisplayByClass = (css, attr) => {
  * @return {void}
  */
 export const removeElementByClass = (css, attr) => {
-  const el = document.querySelector(`.${css}`)
+  const el = document.querySelector(`.${css}`);
 
   if (el) {
-    el.remove()
+    el.remove();
   }
-}
+};
 
 /**
  * hide all custom inline tools except tool
@@ -190,21 +193,24 @@ export const removeElementByClass = (css, attr) => {
  * @param inlineToolCSS {String} default inline toolbar buttons class
  * @return {void}
  */
-export const keepCustomInlineToolOnly = (tool, inlineToolCSS = "ce-inline-toolbar__buttons") => {
-  log("keepCustomInlineToolOnly: ", tool)
+export const keepCustomInlineToolOnly = (
+  tool,
+  inlineToolCSS = "ce-inline-toolbar__buttons"
+) => {
+  log("keepCustomInlineToolOnly: ", tool);
   // build-in inline tools
-  setDisplayByClass(inlineToolCSS, 'none')
+  setDisplayByClass(inlineToolCSS, "none");
 
-  if (tool === 'mention') {
-    setDisplayByClass('cdx-mention__container', 'block')
-    setDisplayByClass('cdx-emoji__container', 'none')
+  if (tool === "mention") {
+    setDisplayByClass("cdx-mention__container", "block");
+    setDisplayByClass("cdx-emoji__container", "none");
   }
 
-  if (tool === 'emoji') {
-    setDisplayByClass('cdx-emoji__container', 'block')
-    setDisplayByClass('cdx-mention__container', 'none')
+  if (tool === "emoji") {
+    setDisplayByClass("cdx-emoji__container", "block");
+    setDisplayByClass("cdx-mention__container", "none");
   }
-}
+};
 
 /**
  * restore default inline toolbar buttons
@@ -212,14 +218,16 @@ export const keepCustomInlineToolOnly = (tool, inlineToolCSS = "ce-inline-toolba
  * @param inlineToolCSS {String} default inline toolbar buttons class
  * @return {void}
  */
-export const restoreDefaultInlineTools = (inlineToolCSS = "ce-inline-toolbar__buttons") => {
-  log("restoreDefaultInlineTools: ")
+export const restoreDefaultInlineTools = (
+  inlineToolCSS = "ce-inline-toolbar__buttons"
+) => {
+  log("restoreDefaultInlineTools: ");
 
-  setDisplayByClass(inlineToolCSS, 'block')
+  setDisplayByClass(inlineToolCSS, "block");
 
-  setDisplayByClass('cdx-mention__container', 'none')
-  setDisplayByClass('cdx-emoji__container', 'none')
-}
+  setDisplayByClass("cdx-mention__container", "none");
+  setDisplayByClass("cdx-emoji__container", "none");
+};
 
 /**
  * replace target element with sign(normal text) if the judge element is empty
@@ -229,9 +237,9 @@ export const restoreDefaultInlineTools = (inlineToolCSS = "ce-inline-toolbar__bu
  * @param {HTMLElement} judgeEl - judge element, usually input element
  * @param {String} sign - final replace element with this sign
  */
-export const convertElementToTextIfNeed = (targetEl, judgeEl, sign = '@') => {
-  if (judgeEl.value.trim() === '') {
-    targetEl.replaceWith("")
-    insertHtmlAtCaret(sign)
+export const convertElementToTextIfNeed = (targetEl, judgeEl, sign = "@") => {
+  if (judgeEl.value.trim() === "") {
+    targetEl.replaceWith("");
+    insertHtmlAtCaret(sign);
   }
-}
+};

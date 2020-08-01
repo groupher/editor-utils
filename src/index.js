@@ -8,6 +8,7 @@ export { debounce } from "debounce";
 export { loadJS, make, isEmptyObj, findIndex } from "./utils";
 
 export {
+  clazz,
   importScript,
   highlightSettingIcon,
   moveCaretToEnd,
