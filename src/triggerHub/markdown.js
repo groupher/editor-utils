@@ -208,6 +208,8 @@ const checkInlineMarkdownSyntax = (curBlock, data) => {
  */
 export const handleMDShortcut = (ev, api) => {
   const curBlockIndex = api.blocks.getCurrentBlockIndex();
+  log("handleMDShortcut curBlockIndex: ", curBlockIndex);
+  if (curBlockIndex < 0) return false;
   const curBlock = api.blocks.getBlockByIndex(curBlockIndex);
 
   const { isValidMDStatus, MDType } = checkMarkdownSyntax(curBlock, ev.data);
