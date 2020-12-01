@@ -104,7 +104,8 @@ const markdownBlockConfig = (type) => {
  *        which is used to trigger the markdown block
  */
 const checkMarkdownSyntax = (curBlock, data) => {
-  const blockText = curBlock.textContent.trim();
+  log("checkMarkdownSyntax curBlock: ", curBlock);
+  const blockText = curBlock.holder.textContent.trim();
   let isValidMDStatus = true;
   let MDType = "";
   const isFollowedBySpace = data === " " ? true : false;
@@ -161,7 +162,7 @@ const checkMarkdownSyntax = (curBlock, data) => {
 
 // inline markdown syntax
 const checkInlineMarkdownSyntax = (curBlock, data) => {
-  const blockText = curBlock.textContent.trim();
+  const blockText = curBlock.holder.textContent.trim();
   const { BOLD, ITALIC, MARKER, INLINE_CODE } = MD_REG;
 
   const boldTexts = blockText.match(BOLD);
@@ -209,8 +210,8 @@ const checkInlineMarkdownSyntax = (curBlock, data) => {
 export const handleMDShortcut = (ev, api) => {
   const curBlockIndex = api.blocks.getCurrentBlockIndex();
   log("handleMDShortcut curBlockIndex: ", curBlockIndex);
-  if (curBlockIndex < 0) return false;
   const curBlock = api.blocks.getBlockByIndex(curBlockIndex);
+  if (curBlockIndex < 0 || !curBlock) return false;
 
   const { isValidMDStatus, MDType } = checkMarkdownSyntax(curBlock, ev.data);
   if (!isValidMDStatus) return false;
@@ -236,6 +237,8 @@ export const handleMDShortcut = (ev, api) => {
 export const handleInlineMDShortcut = (ev, api) => {
   const curBlockIndex = api.blocks.getCurrentBlockIndex();
   const curBlock = api.blocks.getBlockByIndex(curBlockIndex);
+
+  if (curBlockIndex < 0 || !curBlock) return false;
 
   const { isValid, md, html } = checkInlineMarkdownSyntax(curBlock, ev.data);
   if (isValid) {
