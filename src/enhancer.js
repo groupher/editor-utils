@@ -21,7 +21,7 @@ const inputHandler = (ev, api, opt) => {
   }
   if (opt.mention) {
     log("handle mention");
-    // handleMention(ev);
+    handleMention(ev);
   }
   if (opt.emoji) {
     handleEmoji(ev);
