@@ -1,9 +1,9 @@
-import buildLog from '../logger'
+import buildLog from "../logger";
 import { insertHtmlAtCaret, selectNode } from "../dom";
 import { CSS, TRIGGER } from "./metrics";
 import { INLINE_BLOCK_TAG } from "../constant";
 
-const log = buildLog('utils/emoji')
+const log = buildLog("utils/emoji");
 
 /**
  * handle mention (@)
@@ -12,19 +12,25 @@ const log = buildLog('utils/emoji')
  * @private
  */
 const handleMention = (ev) => {
-  log('handleMention: ', ev.data)
   if (ev.data === TRIGGER.mention) {
+    log("handleMention: ", ev.data);
     const mention = `<${INLINE_BLOCK_TAG.mention} class="${CSS.mention}" contenteditable="false" id="${CSS.mention}" tabindex="1">&nbsp;</${INLINE_BLOCK_TAG.mention}>`;
     const mentionId = `#${CSS.mention}`;
 
+    log("insertHtmlAtCaret: ", mention);
     insertHtmlAtCaret(mention);
+    log("insertHtmlAtCaret done: ");
 
     const mentionParent = document.querySelector(mentionId).parentElement;
+    log("mentionParent: ", mentionParent);
     mentionParent.innerHTML = mentionParent.innerHTML.replace(
       TRIGGER.mention + mention,
       mention
     );
+
+    log("selectNode before");
     selectNode(document.querySelector(mentionId));
+    log("selectNode after");
   }
 };
 
