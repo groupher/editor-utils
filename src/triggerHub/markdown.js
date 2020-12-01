@@ -241,21 +241,16 @@ export const handleInlineMDShortcut = (ev, api) => {
   if (curBlockIndex < 0 || !curBlock) return false;
 
   const { isValid, md, html } = checkInlineMarkdownSyntax(curBlock, ev.data);
-  log("handleInlineMDShortcut: ", isValid);
   if (isValid) {
     const INLINE_MD_HOLDER = `<span id="${ANCHOR.INLINE_MD}" />`;
 
-    log("1");
     // 改变 innerHTML 以后光标会到内容的最开始，需要埋一个点，完事后在选中
     insertHtmlAtCaret(INLINE_MD_HOLDER);
-    log("2");
     ev.target.innerHTML = ev.target.innerHTML.replace(md, html);
     selectNode(document.querySelector(`#${ANCHOR.INLINE_MD}`));
-    log("3");
     document.querySelector(`#${ANCHOR.INLINE_MD}`).remove();
 
     // 防止插入粗体以后以后输入一直是粗体。。
     insertHtmlAtCaret(ANCHOR.SPACE);
-    log("4");
   }
 };

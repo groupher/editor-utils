@@ -20,7 +20,8 @@ const inputHandler = (ev, api, opt) => {
     handleInlineMDShortcut(ev, api);
   }
   if (opt.mention) {
-    handleMention(ev);
+    log("handle mention");
+    // handleMention(ev);
   }
   if (opt.emoji) {
     handleEmoji(ev);
