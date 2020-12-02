@@ -23,10 +23,10 @@ const handleMention = (ev) => {
 
     const mentionParent = document.querySelector(mentionId).parentElement;
     log("mentionParent: ", mentionParent);
-    // mentionParent.innerHTML = mentionParent.innerHTML.replace(
-    //   TRIGGER.mention + mention,
-    //   mention
-    // );
+    mentionParent.innerHTML = mentionParent.innerHTML.replace(
+      TRIGGER.mention + mention,
+      mention
+    );
 
     // log("selectNode before");
     // selectNode(document.querySelector(mentionId));

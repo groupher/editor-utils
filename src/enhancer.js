@@ -15,15 +15,11 @@ const log = buildLog("utils:enhancer");
 const inputHandler = (ev, api, opt) => {
   if (opt.markdown) {
     handleMDShortcut(ev, api);
-  }
-  if (opt.inlineMarkdown) {
+  } else if (opt.inlineMarkdown) {
     handleInlineMDShortcut(ev, api);
-  }
-  if (opt.mention) {
-    log("handle mention");
+  } else if (opt.mention) {
     handleMention(ev);
-  }
-  if (opt.emoji) {
+  } else if (opt.emoji) {
     handleEmoji(ev);
   }
 };
