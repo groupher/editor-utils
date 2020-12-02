@@ -227,8 +227,11 @@ export const handleMDShortcut = (ev, api) => {
   console.log("markdownBlockConfig isInvalid: ", markdownBlockConfig(MDType));
 
   if (!isInvalid) {
+    console.log("delete");
     api.blocks.delete(curBlockIndex);
+    console.log("insert");
     api.blocks.insert(type, toolData, config, curBlockIndex);
+    console.log("setToBlock");
     // set cursor to first char
     api.caret.setToBlock(curBlockIndex, "start");
   }
