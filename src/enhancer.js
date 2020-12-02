@@ -67,7 +67,7 @@ export const enhanceBlock = (el, api, option = {}) => {
     false
   );
 
-  api.listeners.on(el, "keyup", (ev) => keyupHandler(ev), false);
+  // api.listeners.on(el, "keyup", (ev) => keyupHandler(ev), false);
 };
 
 export const freeEnhanceBlock = (el, api) => {
