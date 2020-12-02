@@ -105,6 +105,8 @@ const markdownBlockConfig = (type) => {
  */
 const checkMarkdownSyntax = (curBlock, data) => {
   const blockText = curBlock.holder.textContent.trim();
+  log("blockText: ", blockText);
+
   let isValidMDStatus = true;
   let MDType = "";
   const isFollowedBySpace = data === " " ? true : false;
@@ -221,7 +223,8 @@ export const handleMDShortcut = (ev, api) => {
 
   // delete current block
   const { isInvalid, type, toolData, config } = markdownBlockConfig(MDType);
-  console.log("markdownBlockConfig isInvalid: ", isInvalid);
+  console.log("MDType: ", MDType);
+  console.log("markdownBlockConfig isInvalid: ", markdownBlockConfig(MDType));
 
   if (!isInvalid) {
     api.blocks.delete(curBlockIndex);
