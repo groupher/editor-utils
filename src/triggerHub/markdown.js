@@ -104,7 +104,6 @@ const markdownBlockConfig = (type) => {
  *        which is used to trigger the markdown block
  */
 const checkMarkdownSyntax = (curBlock, data) => {
-  log("checkMarkdownSyntax curBlock: ", curBlock);
   const blockText = curBlock.holder.textContent.trim();
   let isValidMDStatus = true;
   let MDType = "";
