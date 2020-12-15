@@ -6,6 +6,7 @@ import {
   handleInlineMDShortcut,
   handleMention,
   handleEmoji,
+  handleLinkCard,
 } from "./triggerHub";
 
 import { CSS } from "./triggerHub/metrics";
@@ -21,6 +22,8 @@ const inputHandler = (ev, api, opt) => {
     handleMention(ev);
   } else if (opt.emoji) {
     handleEmoji(ev);
+  } else if (opt.linkCard) {
+    handleLinkCard(ev);
   }
 };
 
@@ -50,13 +53,19 @@ const keyupHandler = (e) => {
  * enhance the block with options
  * @param el {HTMLElement}
  * @param api editor.js's api
- * @param option enhance options
+ * @param option enhance options, default: { markdown: false, inlineMarkdown: true, mention: true, emoji: true, linkCard: false }
  *
  * @returns void
  */
 export const enhanceBlock = (el, api, option = {}) => {
   const opt = Object.assign(
-    { markdown: false, inlineMarkdown: true, mention: true, emoji: true },
+    {
+      markdown: false,
+      inlineMarkdown: true,
+      mention: true,
+      emoji: true,
+      linkCard: false,
+    },
     option
   );
 

@@ -40,7 +40,7 @@ const parseMatchTexts = function (texts) {
   };
 };
 
-const markdownBlockConfig = (type) => {
+const _markdownBlockConfig = (type) => {
   switch (type) {
     case MD_TYPE.HEADER_1:
       return {
@@ -102,8 +102,9 @@ const markdownBlockConfig = (type) => {
  * @param curBlock {object} editor.js's edit block
  * @param data {string} current input data, data === ' ' means input something followed by a space
  *        which is used to trigger the markdown block
+ * @private
  */
-const checkMarkdownSyntax = (curBlock, data) => {
+const _checkMarkdownSyntax = (curBlock, data) => {
   const blockText = curBlock.holder.textContent.trim();
   log("blockText: ", blockText);
 
@@ -162,7 +163,7 @@ const checkMarkdownSyntax = (curBlock, data) => {
 };
 
 // inline markdown syntax
-const checkInlineMarkdownSyntax = (curBlock, data) => {
+const _checkInlineMarkdownSyntax = (curBlock, data) => {
   const blockText = curBlock.holder.textContent.trim();
   const { BOLD, ITALIC, MARKER, INLINE_CODE } = MD_REG;
 
@@ -212,26 +213,18 @@ export const handleMDShortcut = (ev, api) => {
   const curBlockIndex = api.blocks.getCurrentBlockIndex();
   const curBlock = api.blocks.getBlockByIndex(curBlockIndex);
 
-  console.log("handleMDShortcut curBlock: ", curBlock);
-
   if (curBlockIndex < 0 || !curBlock) return false;
 
-  const { isValidMDStatus, MDType } = checkMarkdownSyntax(curBlock, ev.data);
+  const { isValidMDStatus, MDType } = _checkMarkdownSyntax(curBlock, ev.data);
 
-  console.log("handleMDShortcut isValidMDStatus: ", isValidMDStatus);
   if (!isValidMDStatus) return false;
 
   // delete current block
-  const { isInvalid, type, toolData, config } = markdownBlockConfig(MDType);
-  console.log("MDType: ", MDType);
-  console.log("markdownBlockConfig isInvalid: ", markdownBlockConfig(MDType));
+  const { isInvalid, type, toolData, config } = _markdownBlockConfig(MDType);
 
   if (!isInvalid) {
-    console.log("delete");
     api.blocks.delete(curBlockIndex);
-    console.log("insert");
     api.blocks.insert(type, toolData, config, curBlockIndex);
-    console.log("setToBlock");
     // set cursor to first char
     api.caret.setToBlock(curBlockIndex, "start");
   }
@@ -249,7 +242,7 @@ export const handleInlineMDShortcut = (ev, api) => {
 
   if (curBlockIndex < 0 || !curBlock) return false;
 
-  const { isValid, md, html } = checkInlineMarkdownSyntax(curBlock, ev.data);
+  const { isValid, md, html } = _checkInlineMarkdownSyntax(curBlock, ev.data);
   if (isValid) {
     const INLINE_MD_HOLDER = `<span id="${ANCHOR.INLINE_MD}" />`;
 
