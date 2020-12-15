@@ -33,7 +33,7 @@ const inputHandler = (ev, api, opt) => {
   }
 
   if (opt.linkCard) {
-    handleLinkCard(ev);
+    handleLinkCard(ev, api);
   }
 };
 
