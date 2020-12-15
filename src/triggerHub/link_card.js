@@ -1,6 +1,6 @@
 import buildLog from "../logger";
 
-const log = buildLog("utils:markdown");
+const log = buildLog("utils:linkCard");
 /**
  * handle link card
  */

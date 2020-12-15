@@ -14,6 +14,8 @@ import { CSS } from "./triggerHub/metrics";
 const log = buildLog("utils:enhancer");
 
 const inputHandler = (ev, api, opt) => {
+  log("inputHandler: ", ev);
+
   if (opt.markdown) {
     handleMDShortcut(ev, api);
   } else if (opt.inlineMarkdown) {

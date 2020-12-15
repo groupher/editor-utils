@@ -106,7 +106,6 @@ const _markdownBlockConfig = (type) => {
  */
 const _checkMarkdownSyntax = (curBlock, data) => {
   const blockText = curBlock.holder.textContent.trim();
-  log("blockText: ", blockText);
 
   let isValidMDStatus = true;
   let MDType = "";
