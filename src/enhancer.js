@@ -20,6 +20,7 @@ const inputHandler = (ev, api, opt) => {
   if (opt.markdown) {
     handleMDShortcut(ev, api);
   }
+
   if (opt.inlineMarkdown) {
     handleInlineMDShortcut(ev, api);
   }

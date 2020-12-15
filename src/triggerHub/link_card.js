@@ -26,9 +26,9 @@ const _isValidURL = (curBlock, data) => {
   const blockText = curBlock.holder.textContent.trim();
   const isFollowedBySpace = data === " " ? true : false;
 
-  log("isValidLink: ", data);
+  log("_isValidURL: ", blockText);
 
-  if (!!URL_PATTERN.test(data) && isFollowedBySpace) {
+  if (!!URL_PATTERN.test(blockText) && isFollowedBySpace) {
     return true;
   }
 
