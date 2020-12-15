@@ -56,7 +56,7 @@ const handleLinkCard = (ev, api) => {
 
   api.blocks.delete(curBlockIndex);
   api.blocks.insert(
-    "link",
+    "linkCard",
     {
       link: "https://codex.so",
       meta: {
