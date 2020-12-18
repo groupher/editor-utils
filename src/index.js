@@ -5,9 +5,10 @@ import {
 } from "./triggerHub";
 
 export { debounce } from "debounce";
-export { loadJS, make, isEmptyObj, findIndex } from "./utils";
+export { loadJS, isEmptyObj, findIndex } from "./utils";
 
 export {
+  make,
   clazz,
   importScript,
   highlightSettingIcon,

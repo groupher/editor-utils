@@ -220,6 +220,7 @@ export const handleMDShortcut = (ev, api) => {
 
   // delete current block
   const { isInvalid, type, toolData, config } = _markdownBlockConfig(MDType);
+  log("_markdownBlockConfig: ", _markdownBlockConfig(MDType));
 
   if (!isInvalid) {
     api.blocks.delete(curBlockIndex);

@@ -243,3 +243,34 @@ export const convertElementToTextIfNeed = (targetEl, judgeEl, sign = "@") => {
     insertHtmlAtCaret(sign);
   }
 };
+
+/**
+ * Helper for making Elements with attributes
+ *
+ * @param  {string} tagName           - new Element tag name
+ * @param  {array|string} classNames  - list or name of CSS classname(s)
+ * @param  {Object} attributes        - any attributes
+ * @return {Element}
+ */
+export const make = (tagName, classNames = null, attributes = {}) => {
+  let el = document.createElement(tagName);
+
+  if (Array.isArray(classNames)) {
+    el.classList.add(...classNames);
+  } else if (classNames) {
+    el.classList.add(classNames);
+  }
+
+  for (let attrName in attributes) {
+    // enhanced with setAttribute
+    if (attrName === "placeholder") {
+      el.setAttribute("placeholder", attributes[attrName]);
+    } else if (attrName.indexOf("data-") === 0) {
+      el.setAttribute(attrName, attributes[attrName]);
+    } else {
+      el[attrName] = attributes[attrName];
+    }
+  }
+
+  return el;
+};

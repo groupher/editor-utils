@@ -17,39 +17,39 @@ const classReg = (className) => {
   return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
 };
 
-const hasClass = (elem, c) => {
+const hasClass = (elem, className) => {
   return isClassListValid
-    ? elem.classList.contains(c)
-    : classReg(c).test(elem.className);
+    ? elem.classList.contains(className)
+    : classReg(className).test(elem.className);
 };
 
-const addClass = (elem, c) => {
+const addClass = (elem, className) => {
   if (isClassListValid) {
-    elem.classList.add(c);
+    elem.classList.add(className);
   } else {
-    if (!hasClass(elem, c)) {
-      elem.className = elem.className + " " + c;
+    if (!hasClass(elem, className)) {
+      elem.className = elem.className + " " + className;
     }
   }
 };
 
-const removeClass = (elem, c) => {
+const removeClass = (elem, className) => {
   if (isClassListValid) {
-    elem.classList.remove(c);
+    elem.classList.remove(className);
   } else {
-    elem.className = elem.className.replace(classReg(c), " ");
+    elem.className = elem.className.replace(classReg(className), " ");
   }
 };
 
-const toggleClass = (elem, c, condition) => {
+const toggleClass = (elem, className, condition) => {
   let fn;
   if (condition !== undefined) {
     fn = condition ? addClass : removeClass;
   } else {
-    fn = hasClass(elem, c) ? removeClass : addClass;
+    fn = hasClass(elem, className) ? removeClass : addClass;
   }
 
-  fn(elem, c);
+  fn(elem, className);
 };
 
 const clazz = {
