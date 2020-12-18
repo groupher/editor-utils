@@ -245,6 +245,22 @@ export const convertElementToTextIfNeed = (targetEl, judgeEl, sign = "@") => {
 };
 
 /**
+ * replace element wrapper with new html element
+ * @param {HTMLElement} before
+ * @param {HTMLElement} after
+ * @param {object} api - editor.js's API object
+ * @return {void}
+ */
+export const replaceEl = (before, after, api) => {
+  before.replaceWith(after);
+
+  if (api) {
+    api.tooltip.hide();
+    api.toolbar.close();
+  }
+};
+
+/**
  * Helper for making Elements with attributes
  *
  * @param  {string} tagName           - new Element tag name

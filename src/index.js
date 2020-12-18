@@ -9,6 +9,7 @@ export { loadJS, isEmptyObj, findIndex } from "./utils";
 
 export {
   make,
+  replaceEl,
   clazz,
   importScript,
   highlightSettingIcon,
