@@ -272,7 +272,7 @@ export const make = (tagName, classNames = null, attributes = {}) => {
   let el = document.createElement(tagName);
 
   if (Array.isArray(classNames)) {
-    el.classList.add(...classNames);
+    el.classList.add(...classNames.filter((c) => !!c));
   } else if (classNames) {
     el.classList.add(classNames);
   }
