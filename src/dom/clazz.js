@@ -24,6 +24,8 @@ const hasClass = (elem, className) => {
 };
 
 const addClass = (elem, className) => {
+  if (className.trim().length === 0) return;
+
   if (isClassListValid) {
     elem.classList.add(className);
   } else {
@@ -34,6 +36,8 @@ const addClass = (elem, className) => {
 };
 
 const removeClass = (elem, className) => {
+  if (className.trim().length === 0) return;
+
   if (isClassListValid) {
     elem.classList.remove(className);
   } else {
@@ -42,6 +46,8 @@ const removeClass = (elem, className) => {
 };
 
 const toggleClass = (elem, className, condition) => {
+  if (className.trim().length === 0) return;
+
   let fn;
   if (condition !== undefined) {
     fn = condition ? addClass : removeClass;
