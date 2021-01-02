@@ -8,6 +8,7 @@ export { debounce } from "debounce";
 export { loadJS, isEmptyObj, findIndex } from "./utils";
 
 export {
+  isDOM,
   make,
   replaceEl,
   clazz,

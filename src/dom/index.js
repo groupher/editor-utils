@@ -4,6 +4,9 @@ export { default as clazz } from "./clazz";
 
 const log = buildLog("utils/dom");
 
+// check if given param is HTML Element
+export const isDOM = (el) => el instanceof Element;
+
 /**
  * highlight the setting icon in setting panel
  * example: importScript('//cdn.jsdelivr.net/npm/eruda', ['eruda']).then(([eruda]) => eruda.init())
