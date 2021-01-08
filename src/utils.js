@@ -22,7 +22,7 @@ export const loadJS = function (url, func, location) {
 
 /* eslint-disable */
 // see: https://stackoverflow.com/questions/8498592/extract-hostname-name-from-string
-export const parseDomain = url => {
+export const parseDomain = (url) => {
   try {
     const parsedUrl = {};
 
@@ -84,43 +84,12 @@ export const getQueryFromUrl = (name, url) => {
 };
 
 /**
- * Helper for making Elements with attributes
- *
- * @param  {string} tagName           - new Element tag name
- * @param  {array|string} classNames  - list or name of CSS classname(s)
- * @param  {Object} attributes        - any attributes
- * @return {Element}
- */
-export const make = (tagName, classNames = null, attributes = {}) => {
-  let el = document.createElement(tagName);
-
-  if (Array.isArray(classNames)) {
-    el.classList.add(...classNames);
-  } else if (classNames) {
-    el.classList.add(classNames);
-  }
-
-  for (let attrName in attributes) {
-    // enhanced with setAttribute
-    if (attrName === "placeholder") {
-      el.setAttribute("placeholder", attributes[attrName]);
-    } else if (attrName.indexOf("data-") === 0) {
-      el.setAttribute(attrName, attributes[attrName]);
-    } else {
-      el[attrName] = attributes[attrName];
-    }
-  }
-
-  return el;
-};
-
-/**
  * check if obj is empty
  *
  * @param {obj} object
  * @returns boolean
  */
-export const isEmptyObj = obj => {
+export const isEmptyObj = (obj) => {
   for (var x in obj) {
     return false;
   }
@@ -144,4 +113,29 @@ export const findIndex = (array, predicate) => {
     }
   }
   return -1;
+};
+
+/**
+ * see: https://stackoverflow.com/a/44932690/4050784
+ * @param {[any]} arr
+ * @param {number} from
+ * @param {number} to
+ */
+export const insertAndShift = (arr, from, to) => {
+  const cutOut = arr.splice(from, 1)[0]; // cut the element at index 'from'
+
+  arr.splice(to, 0, cutOut); // insert it at index 'to'
+};
+
+/**
+ * see: https://stackoverflow.com/questions/4011629/swapping-two-items-in-a-javascript-array
+ * @param {[any]} arr
+ * @param {number} indexA
+ * @param {number} indexB
+ */
+export const swapArrayItems = (arr, indexA, indexB) => {
+  const temp = arr[indexA];
+
+  arr[indexA] = arr[indexB];
+  arr[indexB] = temp;
 };

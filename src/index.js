@@ -5,7 +5,13 @@ import {
 } from "./triggerHub";
 
 export { debounce } from "debounce";
-export { loadJS, isEmptyObj, findIndex } from "./utils";
+export {
+  loadJS,
+  isEmptyObj,
+  findIndex,
+  insertAndShift,
+  swapArrayItems,
+} from "./utils";
 
 export {
   isDOM,
