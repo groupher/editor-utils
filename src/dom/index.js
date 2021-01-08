@@ -8,6 +8,37 @@ const log = buildLog("utils/dom");
 export const isDOM = (el) => el instanceof Element;
 
 /**
+ * Helper for making Elements with attributes
+ *
+ * @param  {string} tagName           - new Element tag name
+ * @param  {array|string} classNames  - list or name of CSS classname(s)
+ * @param  {Object} attributes        - any attributes
+ * @return {Element}
+ */
+export const make = (tagName, classNames = null, attributes = {}) => {
+  let el = document.createElement(tagName);
+
+  if (Array.isArray(classNames)) {
+    el.classList.add(...classNames.filter((c) => !!c));
+  } else if (classNames) {
+    el.classList.add(classNames);
+  }
+
+  for (let attrName in attributes) {
+    // enhanced with setAttribute
+    if (attrName === "placeholder") {
+      el.setAttribute("placeholder", attributes[attrName]);
+    } else if (attrName.indexOf("data-") === 0) {
+      el.setAttribute(attrName, attributes[attrName]);
+    } else {
+      el[attrName] = attributes[attrName];
+    }
+  }
+
+  return el;
+};
+
+/**
  * highlight the setting icon in setting panel
  * example: importScript('//cdn.jsdelivr.net/npm/eruda', ['eruda']).then(([eruda]) => eruda.init())
  * @param src {String} cdn/remote script address
@@ -264,32 +295,32 @@ export const replaceEl = (before, after, api) => {
 };
 
 /**
- * Helper for making Elements with attributes
- *
- * @param  {string} tagName           - new Element tag name
- * @param  {array|string} classNames  - list or name of CSS classname(s)
- * @param  {Object} attributes        - any attributes
- * @return {Element}
+ * show element in array of elements
+ * @param {Number} index
+ * @param {[HTMLElement]} items
+ * @attr {string} display style: block | flex
  */
-export const make = (tagName, classNames = null, attributes = {}) => {
-  let el = document.createElement(tagName);
+export const showElement = (index, items, attr = "block") => {
+  if (index >= 0) {
+    for (let i = 0; i < items.length; i += 1) {
+      const el = items[i];
 
-  if (Array.isArray(classNames)) {
-    el.classList.add(...classNames.filter((c) => !!c));
-  } else if (classNames) {
-    el.classList.add(classNames);
-  }
-
-  for (let attrName in attributes) {
-    // enhanced with setAttribute
-    if (attrName === "placeholder") {
-      el.setAttribute("placeholder", attributes[attrName]);
-    } else if (attrName.indexOf("data-") === 0) {
-      el.setAttribute(attrName, attributes[attrName]);
-    } else {
-      el[attrName] = attributes[attrName];
+      el.style.display = "none";
     }
+    setTimeout(() => {
+      items[index].style.display = attr;
+    });
   }
+};
 
-  return el;
+/**
+ * hide all elements
+ * @param {[HTMLElement]} elements
+ */
+export const hideElements = (elements) => {
+  for (let i = 0; i < elements.length; i += 1) {
+    const el = elements[i];
+
+    el.style.display = "none";
+  }
 };

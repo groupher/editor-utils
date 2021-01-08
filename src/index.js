@@ -16,6 +16,8 @@ export {
 export {
   isDOM,
   make,
+  showElement,
+  hideElements,
   replaceEl,
   clazz,
   importScript,
