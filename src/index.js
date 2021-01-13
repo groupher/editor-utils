@@ -7,6 +7,7 @@ import {
 export { debounce } from "debounce";
 export {
   loadJS,
+  loadCSS,
   isEmptyObj,
   findIndex,
   insertAndShift,

@@ -1,9 +1,9 @@
 /**
  * dynamically load script
  * see https://stackoverflow.com/questions/14521108/dynamically-load-js-inside-js
- * @param {*} url
- * @param {*} func callback function
- * @param {*} location
+ * @param {String} url
+ * @param {Function} func callback function
+ * @param {HTMLElement} location
  */
 export const loadJS = function (url, func, location) {
   // url is URL of external file, func is the code
@@ -12,6 +12,28 @@ export const loadJS = function (url, func, location) {
 
   let scriptTag = document.createElement("script");
 
+  scriptTag.src = url;
+
+  scriptTag.onload = func;
+  scriptTag.onreadystatechange = func;
+
+  location.appendChild(scriptTag);
+};
+
+/**
+ * dynamically load css script
+ * @param {String} url
+ * @param {Function} func callback function
+ * @param {HTMLElement} location
+ */
+export const loadCSS = function (url, func, location) {
+  // url is URL of external file, func is the code
+  // to be called from the file, location is the location to
+  // insert the <script> element
+
+  let scriptTag = document.createElement("link");
+
+  scriptTag.rel = "stylesheet";
   scriptTag.src = url;
 
   scriptTag.onload = func;
