@@ -1,4 +1,5 @@
 import buildLog from "../logger";
+import { CSS } from "../constant";
 
 export { default as clazz } from "./clazz";
 
@@ -229,7 +230,7 @@ export const removeElementByClass = (css, attr) => {
  */
 export const keepCustomInlineToolOnly = (
   tool,
-  inlineToolCSS = "ce-inline-toolbar__toggler-and-button-wrapper"
+  inlineToolCSS = CSS.editorInlineToolbarWrapper
 ) => {
   log("keepCustomInlineToolOnly: ", tool);
   // build-in inline tools
@@ -253,11 +254,11 @@ export const keepCustomInlineToolOnly = (
  * @return {void}
  */
 export const restoreDefaultInlineTools = (
-  inlineToolCSS = "ce-inline-toolbar__buttons"
+  inlineToolCSS = CSS.editorInlineToolbarWrapper
 ) => {
   log("restoreDefaultInlineTools: ");
 
-  setDisplayByClass(inlineToolCSS, "block");
+  setDisplayByClass(inlineToolCSS, "flex");
 
   setDisplayByClass("cdx-mention__container", "none");
   setDisplayByClass("cdx-emoji__container", "none");
