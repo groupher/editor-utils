@@ -13,13 +13,10 @@ const log = buildLog("utils/emoji");
  */
 const handleMention = (ev) => {
   if (ev.data === TRIGGER.mention) {
-    log("handleMention: ", ev.data);
     const mention = `<${INLINE_BLOCK_TAG.mention} class="${CSS.mention}" contenteditable="false" id="${CSS.mention}" tabindex="1">&nbsp;</${INLINE_BLOCK_TAG.mention}>`;
     const mentionId = `#${CSS.mention}`;
 
-    log("insertHtmlAtCaret: ", mention);
     insertHtmlAtCaret(mention);
-    log("insertHtmlAtCaret done: ");
 
     const mentionParent = document.querySelector(mentionId).parentElement;
     log("mentionParent: ", mentionParent);
@@ -28,8 +25,8 @@ const handleMention = (ev) => {
       mention
     );
 
-    // log("selectNode before");
-    // selectNode(document.querySelector(mentionId));
+    log("selectNode mentionId: ", mentionId);
+    selectNode(document.querySelector(mentionId));
     // log("selectNode after");
   }
 };

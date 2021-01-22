@@ -229,7 +229,7 @@ export const removeElementByClass = (css, attr) => {
  */
 export const keepCustomInlineToolOnly = (
   tool,
-  inlineToolCSS = "ce-inline-toolbar__buttons"
+  inlineToolCSS = "ce-inline-toolbar__toggler-and-button-wrapper"
 ) => {
   log("keepCustomInlineToolOnly: ", tool);
   // build-in inline tools
