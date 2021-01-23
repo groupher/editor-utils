@@ -30,6 +30,7 @@ export {
   restoreDefaultInlineTools,
   removeElementByClass,
   convertElementToTextIfNeed,
+  convertElementToText,
 } from "./dom";
 
 export { enhanceBlock, freeEnhanceBlock } from "./enhancer";

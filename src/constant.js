@@ -3,6 +3,8 @@ export const CSS = {
   mention: "cdx-mention",
   emoji: "cdx-emoji",
   editorInlineToolbarWrapper: "ce-inline-toolbar__toggler-and-button-wrapper",
+  mentionContainer: "cdx-mention__container",
+  emojiContainer: "cdx-emoji__container",
 };
 
 // 使用 inline block tag 的组件内部的 sanitizer 是互斥的，必须使用不同的

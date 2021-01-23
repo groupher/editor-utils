@@ -237,13 +237,13 @@ export const keepCustomInlineToolOnly = (
   setDisplayByClass(inlineToolCSS, "none");
 
   if (tool === "mention") {
-    setDisplayByClass("cdx-mention__container", "block");
-    setDisplayByClass("cdx-emoji__container", "none");
+    setDisplayByClass(CSS.mentionContainer, "block");
+    setDisplayByClass(CSS.emojiContainer, "none");
   }
 
   if (tool === "emoji") {
-    setDisplayByClass("cdx-emoji__container", "block");
-    setDisplayByClass("cdx-mention__container", "none");
+    setDisplayByClass(CSS.emojiContainer, "block");
+    setDisplayByClass(CSS.mentionContainer, "none");
   }
 };
 
@@ -256,12 +256,12 @@ export const keepCustomInlineToolOnly = (
 export const restoreDefaultInlineTools = (
   inlineToolCSS = CSS.editorInlineToolbarWrapper
 ) => {
-  log("restoreDefaultInlineTools: ");
+  log("restoreDefaultInlineTools: ", inlineToolCSS);
 
   setDisplayByClass(inlineToolCSS, "flex");
 
-  setDisplayByClass("cdx-mention__container", "none");
-  setDisplayByClass("cdx-emoji__container", "none");
+  setDisplayByClass(CSS.mentionContainer, "none");
+  setDisplayByClass(CSS.emojiContainer, "none");
 };
 
 /**
@@ -274,6 +274,21 @@ export const restoreDefaultInlineTools = (
  */
 export const convertElementToTextIfNeed = (targetEl, judgeEl, sign = "@") => {
   if (judgeEl.value.trim() === "") {
+    targetEl.replaceWith("");
+    insertHtmlAtCaret(sign);
+  }
+};
+
+/**
+ * replace target element with sign(normal text) if the judge is true
+ * 当 judge 为 true，将 targetElement 替换为 sign (普通的 text)
+ *
+ * @param {HTMLElement} targetEl - target element to replace
+ * @param {HTMLElement} judgeEl - judge element, usually input element
+ * @param {String} sign - final replace element with this sign
+ */
+export const convertElementToText = (targetEl, judge, sign = "@") => {
+  if (judgeEl) {
     targetEl.replaceWith("");
     insertHtmlAtCaret(sign);
   }
