@@ -284,11 +284,11 @@ export const convertElementToTextIfNeed = (targetEl, judgeEl, sign = "@") => {
  * 当 judge 为 true，将 targetElement 替换为 sign (普通的 text)
  *
  * @param {HTMLElement} targetEl - target element to replace
- * @param {HTMLElement} judgeEl - judge element, usually input element
- * @param {String} sign - final replace element with this sign
+ * @param {boolean} judge - judge element, usually input element
+ * @param {string} sign - final replace element with this sign
  */
 export const convertElementToText = (targetEl, judge, sign = "@") => {
-  if (judgeEl) {
+  if (judge) {
     targetEl.replaceWith("");
     insertHtmlAtCaret(sign);
   }
