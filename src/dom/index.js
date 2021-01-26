@@ -232,16 +232,15 @@ export const keepCustomInlineToolOnly = (
   tool,
   inlineToolCSS = CSS.editorInlineToolbarWrapper
 ) => {
-  log("keepCustomInlineToolOnly: ", tool);
-  // build-in inline tools
+  // hide build-in inline tools
   setDisplayByClass(inlineToolCSS, "none");
 
   if (tool === "mention") {
+    log("keepCustomInlineToolOnly for mention");
     setDisplayByClass(CSS.mentionContainer, "block");
     setDisplayByClass(CSS.emojiContainer, "none");
-  }
-
-  if (tool === "emoji") {
+  } else if (tool === "emoji") {
+    log("keepCustomInlineToolOnly for emoji");
     setDisplayByClass(CSS.emojiContainer, "block");
     setDisplayByClass(CSS.mentionContainer, "none");
   }
@@ -315,8 +314,11 @@ export const replaceEl = (before, after, api) => {
  * @param {Number} index
  * @param {[HTMLElement]} items
  * @attr {string} display style: block | flex
+ * @return {void}
  */
 export const showElement = (index, items, attr = "block") => {
+  if (items[index].style.display === attr) return;
+
   if (index >= 0) {
     for (let i = 0; i < items.length; i += 1) {
       const el = items[i];

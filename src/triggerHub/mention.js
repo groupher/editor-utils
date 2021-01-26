@@ -13,7 +13,7 @@ const log = buildLog("utils/emoji");
  */
 const handleMention = (ev) => {
   if (ev.data === TRIGGER.mention) {
-    const mention = `<${INLINE_BLOCK_TAG.mention} class="${CSS.mention}" contenteditable="false" id="${CSS.mention}" tabindex="1">&nbsp;</${INLINE_BLOCK_TAG.mention}>`;
+    const mention = `<${INLINE_BLOCK_TAG.mention} data-sign="@" class="${CSS.mention}" contenteditable="false" id="${CSS.mention}" tabindex="1">&nbsp;</${INLINE_BLOCK_TAG.mention}>`;
     const mentionId = `#${CSS.mention}`;
 
     insertHtmlAtCaret(mention);
