@@ -48,7 +48,6 @@ const handleLinkCard = (ev, api) => {
   if (curBlockIndex < 0 || !curBlock) return false;
 
   const isValidLink = _isValidURL(curBlock, ev.data);
-  log("isValidLink: ", isValidLink);
 
   if (!isValidLink) return false;
 
