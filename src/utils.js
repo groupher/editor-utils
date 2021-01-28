@@ -1,6 +1,3 @@
-import { limit, length } from "stringz";
-
-export { length } from "stringz";
 /**
  * dynamically load script
  * see https://stackoverflow.com/questions/14521108/dynamically-load-js-inside-js
@@ -178,6 +175,26 @@ export const isString = (value) => {
 };
 
 /**
+ * Description: Count a string (mixing English and Chinese characters) length.
+ *      A basic and rough function.
+ * see @link: https://gist.github.com/Alex1990/306422612ede27235c73
+ *
+ * Performance:
+ *      Multiple methods performance test on http://jsperf.com/count-string-length.
+ *      You can see that using regexp to check range is very slow from the above test page.
+ *
+ * @param {String} str
+ * @returns {Number}
+ */
+export const strLen = (str) => {
+  let count = 0;
+  for (let i = 0, len = str.length; i < len; i++) {
+    count += str.charCodeAt(i) < 256 ? 1 : 2;
+  }
+  return count;
+};
+
+/**
  * cut extra length of a string
  * 截取固定长度字符串，并添加省略号（...）
  * @param {*string} str 需要进行处理的字符串，可含汉字
@@ -185,5 +202,6 @@ export const isString = (value) => {
  */
 export const cutFrom = (str, len = 20) => {
   if (!str || !isString(str)) return "??...";
-  return len >= length(str) ? str : `${limit(str, len, "")}...`;
+  // return len >= length(str) ? str : `${limit(str, len, "")}...`;
+  return len >= strLen(str) ? str : `${str.slice(0, len)}...`;
 };
