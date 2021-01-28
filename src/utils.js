@@ -1,5 +1,6 @@
 import { limit, length } from "stringz";
 
+export { length } from "stringz";
 /**
  * dynamically load script
  * see https://stackoverflow.com/questions/14521108/dynamically-load-js-inside-js

@@ -14,6 +14,7 @@ export {
   swapArrayItems,
   isString,
   cutFrom,
+  length,
 } from "./utils";
 
 export {
