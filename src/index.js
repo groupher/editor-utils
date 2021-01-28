@@ -15,6 +15,7 @@ export {
   isString,
   cutFrom,
   strLen,
+  isLatinString,
 } from "./utils";
 
 export {

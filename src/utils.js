@@ -1,3 +1,5 @@
+// import { limit, length } from "stringz";
+
 /**
  * dynamically load script
  * see https://stackoverflow.com/questions/14521108/dynamically-load-js-inside-js
@@ -197,6 +199,9 @@ export const strLen = (str) => {
 /**
  * cut extra length of a string
  * 截取固定长度字符串，并添加省略号（...）
+ *
+ * NOTE:  这个版本使用简单粗暴的 strLen 方法，缺点是对于 emoji 字符的判断是不准确的
+ *
  * @param {*string} str 需要进行处理的字符串，可含汉字
  * @param {*number} len 需要显示多少个汉字，两个英文字母相当于一个汉字
  */
@@ -204,4 +209,24 @@ export const cutFrom = (str, len = 20) => {
   if (!str || !isString(str)) return "??...";
   // return len >= length(str) ? str : `${limit(str, len, "")}...`;
   return len >= strLen(str) ? str : `${str.slice(0, len)}...`;
+};
+
+/**
+ * judge if the given string only has latin string
+ * @see @link https://stackoverflow.com/a/2013539/4050784
+ * (extend it by add all the symbols and numbers)
+ *
+ * @param {String} str
+ * @returns {Boolean}
+ */
+export const isLatinString = (str) => {
+  const Rex = /^[a-zA-Z0-9,.!#$%&(){}=/<>`@+\|\*\?\s\-_ ’'‘ÆÐƎƏƐƔĲŊŒẞÞǷȜæðǝəɛɣĳŋœĸſßþƿȝĄƁÇĐƊĘĦĮƘŁØƠŞȘŢȚŦŲƯY̨Ƴąɓçđɗęħįƙłøơşșţțŧųưy̨ƴÁÀÂÄǍĂĀÃÅǺĄÆǼǢƁĆĊĈČÇĎḌĐƊÐÉÈĖÊËĚĔĒĘẸƎƏƐĠĜǦĞĢƔáàâäǎăāãåǻąæǽǣɓćċĉčçďḍđɗðéèėêëěĕēęẹǝəɛġĝǧğģɣĤḤĦIÍÌİÎÏǏĬĪĨĮỊĲĴĶƘĹĻŁĽĿʼNŃN̈ŇÑŅŊÓÒÔÖǑŎŌÕŐỌØǾƠŒĥḥħıíìiîïǐĭīĩįịĳĵķƙĸĺļłľŀŉńn̈ňñņŋóòôöǒŏōõőọøǿơœŔŘŖŚŜŠŞȘṢẞŤŢṬŦÞÚÙÛÜǓŬŪŨŰŮŲỤƯẂẀŴẄǷÝỲŶŸȲỸƳŹŻŽẒŕřŗſśŝšşșṣßťţṭŧþúùûüǔŭūũűůųụưẃẁŵẅƿýỳŷÿȳỹƴźżžẓ]$/;
+
+  for (let i = 0, len = str.length; i < len; i++) {
+    if (!Rex.test(str[i])) {
+      return false;
+    }
+  }
+
+  return true;
 };
