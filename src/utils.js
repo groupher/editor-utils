@@ -1,3 +1,5 @@
+import { limit, length } from "stringz";
+
 /**
  * dynamically load script
  * see https://stackoverflow.com/questions/14521108/dynamically-load-js-inside-js
@@ -160,4 +162,27 @@ export const swapArrayItems = (arr, indexA, indexB) => {
 
   arr[indexA] = arr[indexB];
   arr[indexB] = temp;
+};
+
+/**
+ * judge if the value is a string
+ * @param {any} value
+ * @returns {Boolean}
+ */
+export const isString = (value) => {
+  if (typeof value === "string" || value instanceof String) {
+    return true;
+  }
+  return false;
+};
+
+/**
+ * cut extra length of a string
+ * 截取固定长度字符串，并添加省略号（...）
+ * @param {*string} str 需要进行处理的字符串，可含汉字
+ * @param {*number} len 需要显示多少个汉字，两个英文字母相当于一个汉字
+ */
+export const cutFrom = (str, len = 20) => {
+  if (!str || !isString(str)) return "??...";
+  return len >= length(str) ? str : `${limit(str, len, "")}...`;
 };

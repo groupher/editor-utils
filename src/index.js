@@ -12,6 +12,8 @@ export {
   findIndex,
   insertAndShift,
   swapArrayItems,
+  isString,
+  cutFrom,
 } from "./utils";
 
 export {
