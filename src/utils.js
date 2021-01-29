@@ -206,7 +206,7 @@ export const strLen = (str) => {
  * @param {*number} len 需要显示多少个汉字，两个英文字母相当于一个汉字
  */
 export const cutFrom = (str, len = 20) => {
-  if (!str || !isString(str)) return "??...";
+  if (!isString(str)) return "??...";
   // return len >= length(str) ? str : `${limit(str, len, "")}...`;
   return len >= strLen(str) ? str : `${str.slice(0, len)}...`;
 };
