@@ -31,6 +31,8 @@ export const make = (tagName, classNames = null, attributes = {}) => {
       el.setAttribute("placeholder", attributes[attrName]);
     } else if (attrName.indexOf("data-") === 0) {
       el.setAttribute(attrName, attributes[attrName]);
+    } else if (attrName === "for") {
+      el.setAttribute("for", attributes[attrName]);
     } else {
       el[attrName] = attributes[attrName];
     }
