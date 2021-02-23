@@ -319,7 +319,7 @@ export const replaceEl = (before, after, api) => {
  * @return {void}
  */
 export const showElement = (index, items, attr = "block") => {
-  if (items[index].style.display === attr) return;
+  if (items[index] && items[index].style.display === attr) return;
 
   if (index >= 0) {
     for (let i = 0; i < items.length; i += 1) {
