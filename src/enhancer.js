@@ -14,26 +14,26 @@ import { CSS } from "./triggerHub/metrics";
 const log = buildLog("utils:enhancer");
 
 const inputHandler = (ev, api, opt) => {
-  return;
-  // if (opt.markdown) {
-  //   handleMDShortcut(ev, api);
-  // }
+  console.log("inputHandler ", opt);
+  if (opt.markdown) {
+    handleMDShortcut(ev, api);
+  }
 
-  // if (opt.inlineMarkdown) {
-  //   handleInlineMDShortcut(ev, api);
-  // }
+  if (opt.inlineMarkdown) {
+    handleInlineMDShortcut(ev, api);
+  }
 
-  // if (opt.mention) {
-  //   handleMention(ev);
-  // }
+  if (opt.mention) {
+    handleMention(ev);
+  }
 
-  // if (opt.emoji) {
-  //   handleEmoji(ev);
-  // }
+  if (opt.emoji) {
+    handleEmoji(ev);
+  }
 
-  // if (opt.linkCard) {
-  //   handleLinkCard(ev, api);
-  // }
+  if (opt.linkCard) {
+    handleLinkCard(ev, api);
+  }
 };
 
 /**
@@ -79,7 +79,7 @@ export const enhanceBlock = (el, api, option = {}) => {
   );
 
   api.listeners.on(el, "input", (ev) =>
-    debounce(inputHandler(ev, api, opt), 200)
+    debounce(inputHandler(ev, api, opt), 300)
   );
 
   // api.listeners.on(el, "keyup", (ev) => keyupHandler(ev), false);
