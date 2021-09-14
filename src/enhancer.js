@@ -14,25 +14,26 @@ import { CSS } from "./triggerHub/metrics";
 const log = buildLog("utils:enhancer");
 
 const inputHandler = (ev, api, opt) => {
-  if (opt.markdown) {
-    handleMDShortcut(ev, api);
-  }
+  return;
+  // if (opt.markdown) {
+  //   handleMDShortcut(ev, api);
+  // }
 
-  if (opt.inlineMarkdown) {
-    handleInlineMDShortcut(ev, api);
-  }
+  // if (opt.inlineMarkdown) {
+  //   handleInlineMDShortcut(ev, api);
+  // }
 
-  if (opt.mention) {
-    handleMention(ev);
-  }
+  // if (opt.mention) {
+  //   handleMention(ev);
+  // }
 
-  if (opt.emoji) {
-    handleEmoji(ev);
-  }
+  // if (opt.emoji) {
+  //   handleEmoji(ev);
+  // }
 
-  if (opt.linkCard) {
-    handleLinkCard(ev, api);
-  }
+  // if (opt.linkCard) {
+  //   handleLinkCard(ev, api);
+  // }
 };
 
 /**
