@@ -23,10 +23,10 @@ const URL_PATTERN = new RegExp(
  * check is current text is valid link
  */
 const _isValidURL = (curBlock, data) => {
-  const blockText = curBlock.holder.textContent.trim();
-  const isFollowedBySpace = data === " " ? true : false;
+  const blockText = curBlock.holder.textContent.split(" ")[0];
+  const isLinkLike = blockText.indexOf("https://") >= 0;
 
-  if (!!URL_PATTERN.test(blockText) && isFollowedBySpace) {
+  if (isLinkLink && !!URL_PATTERN.test(blockText)) {
     return true;
   }
 

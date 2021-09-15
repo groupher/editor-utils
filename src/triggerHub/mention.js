@@ -12,23 +12,22 @@ const log = buildLog("utils/emoji");
  * @private
  */
 const handleMention = (ev) => {
-  if (ev.data === TRIGGER.mention) {
-    const mention = `<${INLINE_BLOCK_TAG.mention} data-sign="@" class="${CSS.mention}" contenteditable="false" id="${CSS.mention}" tabindex="1">&nbsp;</${INLINE_BLOCK_TAG.mention}>`;
-    const mentionId = `#${CSS.mention}`;
+  if (ev.data !== TRIGGER.mention) return;
 
-    insertHtmlAtCaret(mention);
+  const mention = `<${INLINE_BLOCK_TAG.mention} data-sign="@" class="${CSS.mention}" contenteditable="false" id="${CSS.mention}" tabindex="1">&nbsp;</${INLINE_BLOCK_TAG.mention}>`;
+  const mentionId = `#${CSS.mention}`;
 
-    const mentionParent = document.querySelector(mentionId).parentElement;
-    log("mentionParent: ", mentionParent);
-    mentionParent.innerHTML = mentionParent.innerHTML.replace(
-      TRIGGER.mention + mention,
-      mention
-    );
+  insertHtmlAtCaret(mention);
 
-    log("selectNode mentionId: ", mentionId);
-    selectNode(document.querySelector(mentionId));
-    // log("selectNode after");
-  }
+  const mentionParent = document.querySelector(mentionId).parentElement;
+  log("mentionParent: ", mentionParent);
+  mentionParent.innerHTML = mentionParent.innerHTML.replace(
+    TRIGGER.mention + mention,
+    mention
+  );
+
+  log("selectNode mentionId: ", mentionId);
+  selectNode(document.querySelector(mentionId));
 };
 
 export default handleMention;

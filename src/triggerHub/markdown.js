@@ -240,9 +240,11 @@ export const handleInlineMDShortcut = (ev, api) => {
   const curBlockIndex = api.blocks.getCurrentBlockIndex();
   const curBlock = api.blocks.getBlockByIndex(curBlockIndex);
 
-  if (curBlockIndex < 0 || !curBlock) return false;
+  if (curBlockIndex < 0 || !curBlock) return;
 
   const { isValid, md, html } = _checkInlineMarkdownSyntax(curBlock, ev.data);
+  if (!isValid) return;
+
   if (isValid) {
     const INLINE_MD_HOLDER = `<span id="${ANCHOR.INLINE_MD}" />`;
 
