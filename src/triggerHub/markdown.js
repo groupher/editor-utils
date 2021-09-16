@@ -25,9 +25,10 @@ const MD_TYPE = {
 const MD_REG = {
   // BOLD_old: new RegExp(/\*\*(.*?)\*\*/),
   BOLD: new RegExp(/\*\*([\S]{1,})\*\*/),
-  ITALIC: new RegExp(/__([\S]{1,})__/),
+  STRIKE: new RegExp(/--([\S]{1,})--/),
+  // ITALIC: new RegExp(/__([\S]{1,})__/),
   // NOTE:  marker is extended
-  MARKER: new RegExp(/==([\S]{1,})==/),
+  // MARKER: new RegExp(/==([\S]{1,})==/),
   INLINE_CODE: new RegExp(/\`([\S]{1,})\`/),
 };
 
@@ -164,7 +165,7 @@ const _checkMarkdownSyntax = (curBlock, data) => {
 // inline markdown syntax
 const _checkInlineMarkdownSyntax = (curBlock, data) => {
   const blockText = curBlock.holder.textContent.trim();
-  const { BOLD, ITALIC, MARKER, INLINE_CODE } = MD_REG;
+  const { BOLD, STRIKE, INLINE_CODE } = MD_REG;
 
   const boldTexts = blockText.match(BOLD);
   if (boldTexts) {
@@ -172,17 +173,26 @@ const _checkInlineMarkdownSyntax = (curBlock, data) => {
     return { isValid, md, html: `<b>${content}</b>` };
   }
 
-  const markerTexts = blockText.match(MARKER);
-  if (markerTexts) {
-    const { isValid, md, content } = parseMatchTexts(markerTexts);
-    return { isValid, md, html: `<mark class=${CSS.marker}>${content}</mark>` };
+  const strikeTexts = blockText.match(STRIKE);
+  if (strikeTexts) {
+    const { isValid, md, content } = parseMatchTexts(strikeTexts);
+    return {
+      isValid,
+      md,
+      html: `<strike class=${CSS.strike}>${content}</strike>`,
+    };
   }
+  // const markerTexts = blockText.match(MARKER);
+  // if (markerTexts) {
+  //   const { isValid, md, content } = parseMatchTexts(markerTexts);
+  //   return { isValid, md, html: `<mark class=${CSS.marker}>${content}</mark>` };
+  // }
 
-  const italicTexts = blockText.match(ITALIC);
-  if (italicTexts) {
-    const { isValid, md, content } = parseMatchTexts(italicTexts);
-    return { isValid, md, html: `<i>${content}</i>` };
-  }
+  // const italicTexts = blockText.match(ITALIC);
+  // if (italicTexts) {
+  //   const { isValid, md, content } = parseMatchTexts(italicTexts);
+  //   return { isValid, md, html: `<i>${content}</i>` };
+  // }
 
   const inlineCodeTexts = blockText.match(INLINE_CODE);
   if (inlineCodeTexts) {

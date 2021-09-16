@@ -1,5 +1,6 @@
 export const CSS = {
   mention: "cdx-mention",
+  strike: "cdx-strike",
   marker: "cdx-marker",
   inlineCode: "inline-code",
   emoji: "cdx-emoji",
@@ -16,5 +17,5 @@ export const ANCHOR = {
 
 export const TRIGGER = {
   mention: "@",
-  emoji: ':',
+  emoji: ":",
 };
