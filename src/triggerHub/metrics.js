@@ -2,7 +2,7 @@ export const CSS = {
   mention: "cdx-mention",
   strike: "cdx-strike",
   marker: "cdx-marker",
-  inlineCode: "inline-code",
+  inlineCode: "cdx-inline-code",
   emoji: "cdx-emoji",
 };
 

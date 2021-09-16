@@ -165,6 +165,8 @@ const _checkMarkdownSyntax = (curBlock, data) => {
 // inline markdown syntax
 const _checkInlineMarkdownSyntax = (curBlock, data) => {
   const blockText = curBlock.holder.textContent.trim();
+  console.log("utils: blockText -> ", blockText);
+
   const { BOLD, STRIKE, INLINE_CODE } = MD_REG;
 
   const boldTexts = blockText.match(BOLD);
