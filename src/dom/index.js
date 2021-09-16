@@ -344,3 +344,35 @@ export const hideElements = (elements) => {
     el.style.display = "none";
   }
 };
+
+/**
+ * 拿到当前光标前的 n 个字符
+ * @link https://stackoverflow.com/a/15157786/4050784
+ * currently support header, list, code, etc...
+ * @param containerEl {HTMLElementEvent}
+ * @param count {number}
+ * @return {void}
+ * @public
+ */
+export const getCharacterPrecedingCaret = (containerEl, count = 1) => {
+  let precedingChar = "",
+    sel,
+    range,
+    precedingRange;
+  if (window.getSelection) {
+    sel = window.getSelection();
+    if (sel.rangeCount > 0) {
+      range = sel.getRangeAt(0).cloneRange();
+      range.collapse(true);
+      range.setStart(containerEl, 0);
+      precedingChar = range.toString().slice(-count);
+    }
+  } else if ((sel = document.selection) && sel.type != "Control") {
+    range = sel.createRange();
+    precedingRange = range.duplicate();
+    precedingRange.moveToElementText(containerEl);
+    precedingRange.setEndPoint("EndToStart", range);
+    precedingChar = precedingRange.text.slice(-count);
+  }
+  return precedingChar;
+};

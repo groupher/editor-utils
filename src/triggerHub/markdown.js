@@ -1,4 +1,8 @@
-import { insertHtmlAtCaret, selectNode } from "../dom";
+import {
+  insertHtmlAtCaret,
+  selectNode,
+  getCharacterPrecedingCaret,
+} from "../dom";
 import buildLog from "../logger";
 
 import { ANCHOR, CSS } from "./metrics";
@@ -30,6 +34,12 @@ const MD_REG = {
   // NOTE:  marker is extended
   // MARKER: new RegExp(/==([\S]{1,})==/),
   INLINE_CODE: new RegExp(/\`([\S]{1,})\`/),
+};
+
+const INLINE_MD_ENDING = {
+  BOLD: "**",
+  STRIKE: "--",
+  INLINE_CODE: "`",
 };
 
 // parse the match info given by string.match(regex)
@@ -165,8 +175,6 @@ const _checkMarkdownSyntax = (curBlock, data) => {
 // inline markdown syntax
 const _checkInlineMarkdownSyntax = (curBlock, data) => {
   const blockText = curBlock.holder.textContent.trim();
-  console.log("utils: blockText -> ", blockText);
-
   const { BOLD, STRIKE, INLINE_CODE } = MD_REG;
 
   const boldTexts = blockText.match(BOLD);
@@ -218,7 +226,7 @@ const _checkInlineMarkdownSyntax = (curBlock, data) => {
  * @param ev {HTMLElementEvent}
  * @param api {Editor.js's api object}
  * @return {void}
- * @private
+ * @public
  */
 export const handleMDShortcut = (ev, api) => {
   const curBlockIndex = api.blocks.getCurrentBlockIndex();
@@ -242,27 +250,21 @@ export const handleMDShortcut = (ev, api) => {
   }
 };
 
-export const getCharacterPrecedingCaret = (containerEl) => {
-  let precedingChar = "",
-    sel,
-    range,
-    precedingRange;
-  if (window.getSelection) {
-    sel = window.getSelection();
-    if (sel.rangeCount > 0) {
-      range = sel.getRangeAt(0).cloneRange();
-      range.collapse(true);
-      range.setStart(containerEl, 0);
-      precedingChar = range.toString().slice(-1);
-    }
-  } else if ((sel = document.selection) && sel.type != "Control") {
-    range = sel.createRange();
-    precedingRange = range.duplicate();
-    precedingRange.moveToElementText(containerEl);
-    precedingRange.setEndPoint("EndToStart", range);
-    precedingChar = precedingRange.text.slice(-1);
+// 判断是否是 inlineMarkdown 标记结尾
+const isInlineMDEnding = (ev) => {
+  const precedingChars = getCharacterPrecedingCaret(ev.target, 2);
+  if (
+    precedingChars === INLINE_MD_ENDING.BOLD ||
+    precedingChars === INLINE_MD_ENDING.STRIKE
+  ) {
+    return true;
   }
-  return precedingChar;
+
+  if (precedingChars[1] === INLINE_MD_ENDING.INLINE_CODE) {
+    return true;
+  }
+
+  return false;
 };
 
 /**
@@ -279,8 +281,8 @@ export const handleInlineMDShortcut = (ev, api) => {
 
   const { isValid, md, html } = _checkInlineMarkdownSyntax(curBlock, ev.data);
   if (!isValid) return;
-  console.log("utils: handleInlineMDShortcut isValid, ev: ", ev);
-  console.log("previous char: ", getCharacterPrecedingCaret(ev.target));
+
+  const isInlineMDEndingChars = isInlineMDEnding(ev);
 
   if (isValid) {
     const INLINE_MD_HOLDER = `<span id="${ANCHOR.INLINE_MD}" />`;
@@ -291,7 +293,10 @@ export const handleInlineMDShortcut = (ev, api) => {
     selectNode(document.querySelector(`#${ANCHOR.INLINE_MD}`));
     document.querySelector(`#${ANCHOR.INLINE_MD}`).remove();
 
-    // 防止插入粗体以后以后输入一直是粗体。。
-    insertHtmlAtCaret(ANCHOR.SPACE);
+    // 如果是 inlineMarkdown 结束，自动插入一个占位空格
+    // 比如: 防止插入粗体以后以后输入一直是粗体。。
+    if (isInlineMDEndingChars) {
+      insertHtmlAtCaret(ANCHOR.SPACE);
+    }
   }
 };
