@@ -256,6 +256,7 @@ export const handleInlineMDShortcut = (ev, api) => {
 
   const { isValid, md, html } = _checkInlineMarkdownSyntax(curBlock, ev.data);
   if (!isValid) return;
+  console.log("utils: handleInlineMDShortcut isValid, ev: ", ev);
 
   if (isValid) {
     const INLINE_MD_HOLDER = `<span id="${ANCHOR.INLINE_MD}" />`;
