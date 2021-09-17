@@ -376,3 +376,20 @@ export const getCharacterPrecedingCaret = (containerEl, count = 1) => {
   }
   return precedingChar;
 };
+
+/**
+ * enable ctrl + enter to insert new line after cur block
+ * @param {HTMLElement} el
+ * @param {object} api - editor.js's API object
+ * @return {void}
+ */
+export const enableCtrlEnterBreak = (el, api) => {
+  el.addEventListener("keyup", (e) => {
+    if (e.keyCode === 13 && e.ctrlKey) {
+      e.preventDefault();
+      const nextIdnex = api.blocks.getCurrentBlockIndex() + 1;
+      api.blocks.insert("paragraph", {}, {}, nextIdnex, true);
+      api.caret.setToBlock(nextIdnex, "start");
+    }
+  });
+};

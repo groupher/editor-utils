@@ -35,6 +35,7 @@ export {
   removeElementByClass,
   convertElementToTextIfNeed,
   convertElementToText,
+  enableCtrlEnterBreak,
 } from "./dom";
 
 export { enhanceBlock, freeEnhanceBlock } from "./enhancer";
