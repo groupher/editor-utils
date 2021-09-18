@@ -4,9 +4,6 @@ export const CSS = {
   marker: "cdx-marker",
   inlineCode: "cdx-inline-code",
   emoji: "cdx-emoji",
-
-  ctrlBreakHint: "cdx-ctrlbreak-hint",
-  ctrlBreakEntity: "cdx-ctrlbreak-entity",
 };
 
 /**
