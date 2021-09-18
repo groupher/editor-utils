@@ -393,3 +393,31 @@ export const enableCtrlEnterBreak = (el, api) => {
     }
   });
 };
+
+/**
+ * add ctrl+enter exit label hint
+ * @param {HTMLElement} el
+ * @param {options} options - position offset options
+ * @return {void}
+ */
+export const addBreakHint = (el, options = {}) => {
+  el.style.position = "relative";
+
+  const hintWrapper = make("div", CSS.ctrlBreakHint, {
+    innerHTML: "跳出:",
+  });
+
+  if (options.bottom) {
+    hintWrapper.style.bottom = options.bottom;
+  }
+  if (options.right) {
+    hintWrapper.style.right = options.right;
+  }
+  // hintWrapper.style.bottom = "-18px";
+  const hintEntify = make("div", CSS.ctrlBreakEntity, {
+    innerHTML: "&#8963; &#8617",
+  });
+
+  hintWrapper.appendChild(hintEntify);
+  el.appendChild(hintWrapper);
+};

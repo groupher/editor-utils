@@ -36,6 +36,7 @@ export {
   convertElementToTextIfNeed,
   convertElementToText,
   enableCtrlEnterBreak,
+  addBreakHint,
 } from "./dom";
 
 export { enhanceBlock, freeEnhanceBlock } from "./enhancer";
