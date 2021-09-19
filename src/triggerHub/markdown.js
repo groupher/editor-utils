@@ -20,6 +20,7 @@ const MD_TYPE = {
   ORDERED_LIST: "ORDERED_LIST",
   QUOTE: "QUOTE",
   CODE: "CODE",
+  DELIMITER: "DELIMITER",
 };
 
 /**
@@ -100,6 +101,14 @@ const _markdownBlockConfig = (type) => {
         config: {},
       };
 
+    case MD_TYPE.DELIMITER: {
+      return {
+        type: "delimiter",
+        toolData: { type: "pen" },
+        config: {},
+      };
+    }
+
     default: {
       return { isInvalid: false, type: "", toolData: "", config: "" };
     }
@@ -161,6 +170,11 @@ const _checkMarkdownSyntax = (curBlock, data) => {
 
     case blockText === "```": {
       MDType = MD_TYPE.CODE;
+      break;
+    }
+
+    case blockText === "---": {
+      MDType = MD_TYPE.DELIMITER;
       break;
     }
 
