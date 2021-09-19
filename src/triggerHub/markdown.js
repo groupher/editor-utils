@@ -173,7 +173,7 @@ const _checkMarkdownSyntax = (curBlock, data) => {
       break;
     }
 
-    case blockText === "---": {
+    case blockText === "---" && isFollowedBySpace: {
       MDType = MD_TYPE.DELIMITER;
       break;
     }
